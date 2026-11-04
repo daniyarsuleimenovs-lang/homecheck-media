@@ -1,4 +1,4 @@
-"""Template sheet: every slide type on demo text (post «Почему нашим данным можно доверять»)."""
+"""Template sheet: every slide type on demo text. Every slide has an image (photo or illustration)."""
 import sys, pathlib
 from PIL import Image
 from playwright.sync_api import sync_playwright
@@ -32,17 +32,17 @@ with sync_playwright() as p:
         '<h2 class="t">Это не объявления</h2>'
         '<p class="p">Мы берём цены из <b>зарегистрированных сделок</b>. Это то, за сколько квартиры реально купили.</p></div>',
         img=photo('astana-baiterek.jpg', 640), img_h=640)
-    # 3. List — no image
-    S['03_spisok_bez_kartinki'] = slide(logo(64) + '<div class="box" style="top:200px">'
-        '<h2 class="t">Что мы не проверяем</h2>'
-        '<ul class="l"><li>Собственников и права</li><li>Аресты и залоги</li><li>Долги перед ОСИ</li><li>Перепланировки</li></ul>'
-        '<p class="lb">Это стоит проверить отдельно, до сделки.</p></div>')
-    # 4. Number — no image
-    S['04_cifra_bez_kartinki'] = slide(logo(64) + '<div class="box" style="top:250px;gap:28px">'
+    # 3. List — low city strip
+    S['03_spisok'] = slide(logo(64) + '<div class="box" style="top:200px">'
+        '<h2 class="t">О чём спросить продавца</h2>'
+        '<ul class="l"><li>Почему продаёте квартиру?</li><li>Как давно она продаётся?</li><li>Когда делали ремонт?</li><li>Были ли перепланировки?</li></ul>'
+        '<p class="lb">Сохраните, пригодится на просмотре.</p></div>', img=ill(city_b, 330), img_h=330)
+    # 4. Number — low city strip
+    S['04_cifra'] = slide(logo(64) + '<div class="box" style="top:250px;gap:28px">'
         '<p class="lb">Сделки с жильём в Казахстане, апрель 2026</p>'
         '<p class="num">35 154</p>'
-        '<p class="p">сделки купли-продажи жилья за один месяц.</p></div>'
-        '<p class="lb" style="position:absolute;left:80px;bottom:72px">Источник: Бюро национальной статистики</p>')
+        '<p class="p">сделки купли-продажи жилья за один месяц.</p>'
+        '<p class="lb">Источник: Бюро национальной статистики</p></div>', img=ill(city_a, 380), img_h=380)
     # 5. Comparison — illustration
     S['05_sravnenie_illustr'] = slide(logo(64) + '<div class="box" style="top:200px;gap:36px">'
         '<h2 class="t">Пример: 3-комн., 78&nbsp;м²</h2>'
