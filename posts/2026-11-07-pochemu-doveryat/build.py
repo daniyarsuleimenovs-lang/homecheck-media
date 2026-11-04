@@ -19,9 +19,9 @@ with sync_playwright() as p:
     S = [
         I(logo(64) + BOX + '<h1 class="t">Почему нашим данным можно доверять</h1>'
           '<span class="p acc">Листайте →</span></div>', scene(seed=7, magnifier=True)),
-        F(logo(64) + BOX + '<h2 class="t">Это не объявления</h2>'
+        I(logo(64) + BOX + '<h2 class="t">Это не объявления</h2>'
           '<p class="p">Мы берём цены из <b>зарегистрированных сделок</b>: за сколько квартиры реально купили.</p></div>',
-          'astana-khan-shatyr.jpg'),
+          scene(seed=14)),
         I(logo(64) + '<div class="box" style="top:250px;gap:28px">'
           '<p class="lb">Сделки с жильём регистрирует государство</p>'
           '<p class="num">27 096</p>'
@@ -30,9 +30,9 @@ with sync_playwright() as p:
         I(logo(64) + BOX + '<h2 class="t">Сравниваем с этим же домом</h2>'
           '<p class="p">Не со средней ценой по городу, а <b>с похожими квартирами в том же доме</b>.</p></div>',
           scene(seed=3, mirror=True)),
-        F(logo(64) + BOX + '<h2 class="t">Проверьте нас на своей квартире</h2>'
+        I(logo(64) + BOX + '<h2 class="t">Проверьте нас на своей квартире</h2>'
           '<p class="p">Введите адрес, где живёте, и мы покажем, <b>когда вы её купили</b>.</p>'
-          '<p class="lb">Если сделка есть в наших данных</p></div>', 'astana-panorama.jpg'),
+          '<p class="lb">Если сделка есть в наших данных</p></div>', scene(seed=5, magnifier=True, mirror=True)),
         I(logo(64) + BOX + '<h2 class="t">Проверьте квартиру до покупки</h2>'
           '<p class="p">Введите адрес на <b>homecheck.kz</b></p></div>', scene(seed=21)),
     ]
