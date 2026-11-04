@@ -98,21 +98,28 @@ def city(w=1080, h=900, seed=7, mirror=False, magnifier=False):
         bw, bh = rnd.randint(70, 130), int(rnd.randint(160, 300) * k)
         s.add(f'<rect x="{x}" y="{ground-bh}" width="{bw}" height="{bh}" fill="{PALE}"/>')
         x += bw + rnd.randint(0, 12)
-    plan = [(20, 180, 420, WHITE, 'wide', False, False),
-            (230, 220, 560, WHITE, 'grid', True, True),
-            (480, 170, 370, TINT, 'ribbon', False, False),
-            (680, 240, 620, WHITE, 'tall', True, False),
-            (950, 150, 440, TINT, 'grid', False, False)]
+    # Front row: layout varies with the seed (widths, heights, window styles), so scenes in one post differ.
+    plan, gaps, x = [], [], rnd.randint(-30, 20)
+    while x < w - 60:
+        bw = rnd.randint(140, 250)
+        bh = rnd.randint(360, 640)
+        plan.append((x, bw, bh, rnd.choice([WHITE, WHITE, TINT]), rnd.choice(['grid', 'wide', 'tall', 'ribbon']),
+                     rnd.random() < 0.45, rnd.random() < 0.3))
+        gap = rnd.randint(24, 70)
+        gaps.append(x + bw + gap // 2)
+        x += bw + gap
+    main = max(plan, key=lambda b: b[2] if 520 < b[0] + b[1] // 2 < 960 else 0)
     main_top = None
     for bx, bw, bh, body, style, balc, core in plan:
         top = _building(s, rnd, bx, bw, int(bh * k), ground, body, style, balc, core)
-        if bx == 680:
-            main_top = top
-    for tx in [12, 215, 462, 662, 935, 1066]:
-        _tree(s, tx, ground, rnd.randint(120, 170), rnd.choice([GREEN, GREEN2]))
+        if (bx, bw) == main[:2]:
+            main_top, main_cx = top, bx + bw // 2
+    for tx in gaps:
+        if rnd.random() < 0.8:
+            _tree(s, tx, ground, rnd.randint(110, 170), rnd.choice([GREEN, GREEN2]))
     s.add(f'<rect x="0" y="{ground}" width="{w}" height="40" fill="{PALE}"/>')
     if magnifier:
-        cx, cy, r = 800, main_top + int(230 * min(k, 1.4)), 100
+        cx, cy, r = main_cx, main_top + int(230 * min(k, 1.4)), 100
         s.add(f'<defs><clipPath id="lens"><circle cx="{cx}" cy="{cy}" r="{r}"/></clipPath></defs>')
         s.add(f'<g clip-path="url(#lens)"><rect x="{cx-r}" y="{cy-r}" width="{2*r}" height="{2*r}" fill="{WHITE}"/>')
         for dx, dy, col in [(-80, -78, LBLUE), (6, -78, YEL), (-80, 8, LBLUE), (6, 8, LBLUE)]:
