@@ -92,9 +92,10 @@ def city(w=1080, h=900, seed=7, mirror=False, magnifier=False):
     rnd = random.Random(seed)
     s = _Svg(w, h)
     ground = h - 40
+    k = max(0.55, (h - 40) / 860)  # scene designed for h=900; building heights follow the strip height
     x = 0
     while x < w:  # far skyline
-        bw, bh = rnd.randint(70, 130), rnd.randint(160, 300)
+        bw, bh = rnd.randint(70, 130), int(rnd.randint(160, 300) * k)
         s.add(f'<rect x="{x}" y="{ground-bh}" width="{bw}" height="{bh}" fill="{PALE}"/>')
         x += bw + rnd.randint(0, 12)
     plan = [(20, 180, 420, WHITE, 'wide', False, False),
@@ -104,14 +105,14 @@ def city(w=1080, h=900, seed=7, mirror=False, magnifier=False):
             (950, 150, 440, TINT, 'grid', False, False)]
     main_top = None
     for bx, bw, bh, body, style, balc, core in plan:
-        top = _building(s, rnd, bx, bw, bh, ground, body, style, balc, core)
+        top = _building(s, rnd, bx, bw, int(bh * k), ground, body, style, balc, core)
         if bx == 680:
             main_top = top
     for tx in [12, 215, 462, 662, 935, 1066]:
         _tree(s, tx, ground, rnd.randint(120, 170), rnd.choice([GREEN, GREEN2]))
     s.add(f'<rect x="0" y="{ground}" width="{w}" height="40" fill="{PALE}"/>')
     if magnifier:
-        cx, cy, r = 800, main_top + 230, 100
+        cx, cy, r = 800, main_top + int(230 * min(k, 1.4)), 100
         s.add(f'<defs><clipPath id="lens"><circle cx="{cx}" cy="{cy}" r="{r}"/></clipPath></defs>')
         s.add(f'<g clip-path="url(#lens)"><rect x="{cx-r}" y="{cy-r}" width="{2*r}" height="{2*r}" fill="{WHITE}"/>')
         for dx, dy, col in [(-80, -78, LBLUE), (6, -78, YEL), (-80, 8, LBLUE), (6, 8, LBLUE)]:

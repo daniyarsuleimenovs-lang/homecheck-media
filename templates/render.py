@@ -85,3 +85,17 @@ def render(html, path, page, h=1350):
     page.wait_for_timeout(150)
     png = page.screenshot(clip={'x': 0, 'y': 0, 'width': 1080, 'height': h})
     Image.open(io.BytesIO(png)).convert('RGB').save(path, quality=92)
+
+
+def compose(inner, src, treatment, page, h=1350, overlap=120, top=None):
+    """Image fills everything below the text: it starts `overlap` px above the bottom of the text block,
+    so the faded top of the picture sits under the last lines and no empty background band remains."""
+    page.set_viewport_size({'width': 1080, 'height': h})
+    page.set_content(slide(inner, h=h))
+    page.evaluate('document.fonts.ready')
+    page.wait_for_timeout(100)
+    bottom = page.evaluate("Math.max(...[...document.querySelectorAll('.box')].map(e => e.getBoundingClientRect().bottom))")
+    img_h = int(h - bottom + overlap)
+    if callable(src):  # illustration drawn for the exact strip height
+        src = src(img_h)
+    return slide(inner, h=h, img=data_uri(treat(src, img_h, top=top, **treatment)), img_h=img_h)
