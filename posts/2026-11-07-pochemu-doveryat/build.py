@@ -15,20 +15,18 @@ GAP = 40  # min space between text and the scene
 
 INNER = [
     logo(64) + BOX + '<h1 class="t">Почему нашим данным можно доверять</h1><span class="p acc">Листайте →</span></div>',
-    logo(64) + BOX + '<h2 class="t">Это не объявления</h2>'
-      '<p class="p">Мы берём цены из <b>зарегистрированных сделок</b>: за сколько квартиры реально купили.</p></div>',
-    logo(64) + '<div class="box" style="top:200px;gap:24px">'
-      '<p class="lb">Сделки с жильём регистрирует государство</p>'
-      '<p class="num">27 096</p>'
-      '<p class="p">сделок с квартирами за сентябрь 2026 в&nbsp;Казахстане</p>'
+    logo(64) + BOX + '<h2 class="t">Данные из госрегистрации</h2>'
+      '<p class="p">Каждая продажа квартиры регистрируется государством. <b>На этих записях построены наши данные.</b></p></div>',
+    logo(64) + '<div class="box" style="top:200px;gap:28px">'
+      '<p class="num">≈33&nbsp;000</p>'
+      '<p class="p">сделок с жильём в среднем регистрируют в Казахстане каждый месяц в 2026 году</p>'
       '<p class="lb">Источник: Бюро национальной статистики</p></div>',
     logo(64) + BOX + '<h2 class="t">Сравниваем с этим же домом</h2>'
-      '<p class="p">Не со средней ценой по городу, а <b>с похожими квартирами в том же доме</b>.</p></div>',
-    logo(64) + BOX + '<h2 class="t">Проверьте нас на своей квартире</h2>'
-      '<p class="p">Введите адрес, где живёте, и мы покажем, <b>когда вы её купили</b>.</p>'
-      '<p class="lb">Если сделка есть в наших данных</p></div>',
-    logo(64) + BOX + '<h2 class="t">Проверьте квартиру до покупки</h2>'
-      '<p class="p">Введите адрес на <b>homecheck.kz</b></p></div>',
+      '<p class="p">Не со средней ценой по городу, а <b>с похожими квартирами в&nbsp;том же доме</b>.</p></div>',
+    logo(64) + BOX + '<h2 class="t">Без личных данных</h2>'
+      '<p class="p">Мы не показываем, кто продавал и покупал квартиру, — <b>только сделки, цены и даты</b>.</p></div>',
+    logo(64) + BOX + '<h2 class="t">Узнайте главное до покупки</h2>'
+      '<p class="p">Введите адрес на <b>homecheck.kz</b> и посмотрите историю квартиры до&nbsp;сделки.</p></div>',
 ]
 
 
@@ -39,7 +37,7 @@ def scene_top(img):
     return int(np.argmax(rows > 0.01))
 
 
-SCALE = {4: 0.85}  # isolated object on plain sky: shrink instead of cutting off the lower floor
+SCALE = {4: 0.85, 6: 0.85}  # isolated object on plain sky: shrink instead of cutting off the lower floor
 
 
 def fit(img, text_bottom, scale=1.0):
