@@ -116,13 +116,13 @@ HTML = f'''<!doctype html><html lang="ru"><head><meta charset="utf-8"><style>
 .logo .h{{color:#12253E}} .logo .c{{color:#049BE1}}
 .sc{{position:absolute;left:0;top:0;width:1080px;height:1920px;opacity:0}}
 .card{{position:absolute;background:linear-gradient(180deg,#FFFFFF 0%,#F6FAFF 100%);border:1.5px solid rgba(45,140,255,.14);border-radius:34px;box-shadow:0 26px 60px rgba(11,37,69,.18),0 4px 10px rgba(11,37,69,.06);padding:34px 40px}}
-.hd{{display:flex;align-items:center;gap:20px;margin:0 0 20px}}
-.ct{{font-size:44px;font-weight:800;margin:0;white-space:nowrap}}
-.row{{display:flex;align-items:center;gap:20px;font-size:40px;margin:16px 0}}
-.lb{{font-size:30px;color:#2F4566}}
-.ex{{position:absolute;right:80px;top:312px;font-size:30px;font-weight:700;color:#2F4566;background:rgba(255,255,255,.85);border-radius:999px;padding:8px 22px}}
-#sub{{position:absolute;left:80px;width:920px;top:1040px;height:200px;display:flex;align-items:flex-end}}
-#sub span{{display:inline-block;background:rgba(11,37,69,.92);color:#fff;font-size:52px;font-weight:700;line-height:1.25;padding:16px 28px;border-radius:22px;box-shadow:0 12px 30px rgba(11,37,69,.25)}}
+.hd{{display:flex;align-items:center;gap:22px;margin:0 0 22px}}
+.ct{{font-size:56px;font-weight:800;margin:0;white-space:nowrap;letter-spacing:-.01em}}
+.row{{display:flex;align-items:center;gap:22px;font-size:50px;margin:18px 0}}
+.lb{{font-size:38px;color:#2F4566}}
+.ex{{position:absolute;right:80px;top:310px;font-size:36px;font-weight:700;color:#2F4566;background:rgba(255,255,255,.85);border-radius:999px;padding:8px 22px}}
+#sub{{position:absolute;left:70px;width:940px;top:1000px;height:240px;display:flex;align-items:flex-end}}
+#sub span{{display:inline-block;background:rgba(11,37,69,.92);color:#fff;font-size:60px;font-weight:700;line-height:1.25;padding:16px 28px;border-radius:22px;box-shadow:0 12px 30px rgba(11,37,69,.25)}}
 .big{{font-size:100px;font-weight:800;line-height:1.05;letter-spacing:-.025em}}
 .bubble{{position:absolute;background:#fff;border-radius:26px;padding:18px 26px;font-size:34px;box-shadow:0 14px 30px rgba(11,37,69,.14)}}
 </style></head><body><div id="s">
@@ -132,9 +132,9 @@ HTML = f'''<!doctype html><html lang="ru"><head><meta charset="utf-8"><style>
 <span class="logo" id="logo"><span class="h">Home</span><span class="c">Check.kz</span></span>
 
 <div class="sc" id="s1">
-  <div id="car" style="position:absolute;left:20px;top:660px">{CAR()}</div>
-  <div class="card" id="vin" style="left:540px;top:420px;width:475px;padding:34px 34px">
-    <div class="hd">{icon('car', 60)}<p class="ct">История авто</p></div>
+  <div id="car" style="position:absolute;left:10px;top:700px">{CAR()}</div>
+  <div class="card" id="vin" style="left:470px;top:400px;width:545px;padding:34px 36px">
+    <div class="hd">{icon('car', 72)}<p class="ct">История авто</p></div>
     <div class="row" id="v1">{CHECK}<span>Владельцы</span></div>
     <div class="row" id="v2">{CHECK}<span>Пробег</span></div>
     <div class="row" id="v3">{CHECK}<span>ДТП</span></div>
@@ -142,8 +142,10 @@ HTML = f'''<!doctype html><html lang="ru"><head><meta charset="utf-8"><style>
 </div>
 
 <div class="sc" id="s2">
-  <div id="bld" style="position:absolute;left:250px;top:440px">{building(380, 8, 4, uid='b2')}</div>
-  <div id="q" style="position:absolute;left:690px;top:390px">
+  <div id="bbk1" style="position:absolute;left:-40px;top:620px;opacity:.55;filter:saturate(.7)">{building(220, 5, 3, uid='k1', trees=False)}</div>
+  <div id="bbk2" style="position:absolute;left:720px;top:560px;opacity:.55;filter:saturate(.7)">{building(240, 6, 3, uid='k2', trees=False)}</div>
+  <div id="bld" style="position:absolute;left:230px;top:400px">{building(420, 8, 4, uid='b2')}</div>
+  <div id="q" style="position:absolute;left:700px;top:360px">
     <svg viewBox="0 0 220 220" width="220" height="220"><path d="M110 10 C170 10 210 48 210 100 C210 152 170 190 110 190 C96 190 84 188 72 184 L30 208 L42 168 C22 150 10 126 10 100 C10 48 50 10 110 10Z" fill="#0B2545"/>
     <text x="110" y="140" text-anchor="middle" font-family="Inter" font-weight="800" font-size="120" fill="#FFD36B">?</text></svg></div>
 </div>
@@ -153,45 +155,45 @@ HTML = f'''<!doctype html><html lang="ru"><head><meta charset="utf-8"><style>
     <div style="background:#fff;border-radius:38px;height:100%;padding:22px;position:relative;overflow:hidden">
       <div style="position:absolute;left:50%;top:10px;width:110px;height:24px;margin-left:-55px;background:#0B2545;border-radius:12px"></div>
       <div style="margin-top:30px;height:230px;border-radius:22px;background:linear-gradient(180deg,#D7E9FC,#A9CCF2);overflow:hidden;display:flex;justify-content:center;align-items:flex-end">{building(150, 4, 3, uid='b4', trees=False)}</div>
-      <p style="font-size:34px;font-weight:800;margin:20px 0 6px">2-комн., 52 м²</p>
-      <p style="font-size:28px;color:#2F4566;margin:0 0 18px">Объявление</p>
-      <div id="addr" style="font-size:28px;background:#EAF3FF;border-radius:16px;padding:12px 14px;display:flex;gap:10px;align-items:center">{icon('pin', 40)}<span>Адрес квартиры</span></div>
+      <p style="font-size:40px;font-weight:800;margin:18px 0 6px">2-комн., 52 м²</p>
+      <p style="font-size:32px;color:#2F4566;margin:0 0 16px">Объявление</p>
+      <div id="addr" style="font-size:28px;white-space:nowrap;background:#EAF3FF;border-radius:16px;padding:12px 14px;display:flex;gap:10px;align-items:center">{icon('pin', 40)}<span>Адрес квартиры</span></div>
     </div>
   </div>
-  <div id="chip" style="position:absolute;left:110px;top:900px;font-size:28px;background:#FFE7A3;border-radius:16px;padding:12px 16px;display:flex;gap:10px;align-items:center;box-shadow:0 12px 26px rgba(11,37,69,.2);opacity:0">{icon('pin', 40)}<span>Адрес квартиры</span></div>
-  <div class="card" id="field" style="left:560px;top:560px;width:460px;padding:30px">
-    <p style="font-family:'Barlow Condensed';font-size:56px;font-weight:700;margin:0 0 20px"><span style="color:#12253E">Home</span><span style="color:#049BE1">Check.kz</span></p>
-    <div style="border:3px solid #2D8CFF;border-radius:18px;padding:18px 16px;font-size:30px;min-height:84px;white-space:nowrap;overflow:hidden;background:#F6FAFF"><span id="typed"></span><span id="caret" style="color:#2D8CFF">|</span></div>
+  <div id="chip" style="position:absolute;left:110px;top:900px;font-size:30px;background:#FFE7A3;border-radius:16px;padding:12px 16px;display:flex;gap:10px;align-items:center;box-shadow:0 12px 26px rgba(11,37,69,.2);opacity:0">{icon('pin', 40)}<span>Адрес квартиры</span></div>
+  <div class="card" id="field" style="left:540px;top:540px;width:475px;padding:32px">
+    <p style="font-family:'Barlow Condensed';font-size:66px;font-weight:700;margin:0 0 22px"><span style="color:#12253E">Home</span><span style="color:#049BE1">Check.kz</span></p>
+    <div style="border:3px solid #2D8CFF;border-radius:18px;padding:20px 18px;font-size:36px;min-height:90px;white-space:nowrap;overflow:hidden;background:#F6FAFF"><span id="typed"></span><span id="caret" style="color:#2D8CFF">|</span></div>
   </div>
 </div>
 
 <div class="sc" id="s4">
   <span class="ex">Пример</span>
-  <div class="card" id="h1" style="left:80px;top:420px;width:920px">
-    <div class="hd">{icon('home', 64)}<p class="ct">История квартиры</p></div>
-    <div class="row" style="margin:8px 0"><span style="font-size:68px;font-weight:800;color:#1768CE">2 раза</span><span class="lb" style="font-size:36px">продавали</span></div>
+  <div class="card" id="h1" style="left:65px;top:390px;width:950px">
+    <div class="hd">{icon('home', 72)}<p class="ct">История квартиры</p></div>
+    <div class="row" style="margin:8px 0"><span style="font-size:84px;font-weight:800;color:#1768CE">2 раза</span><span class="lb" style="font-size:44px">продавали</span></div>
     <div style="display:flex;align-items:center;margin-top:12px">
       <div style="width:30px;height:30px;border-radius:50%;background:#2D8CFF;box-shadow:0 0 0 8px rgba(45,140,255,.18)"></div><div style="flex:1;height:8px;border-radius:4px;background:linear-gradient(90deg,#2D8CFF,#8EC2FA)"></div>
       <div style="width:30px;height:30px;border-radius:50%;background:#2D8CFF;box-shadow:0 0 0 8px rgba(45,140,255,.18)"></div><div style="flex:1;height:8px;border-radius:4px;background:linear-gradient(90deg,#8EC2FA,#FFD36B)"></div>
       <div style="width:30px;height:30px;border-radius:50%;background:#FFC94D;box-shadow:0 0 0 8px rgba(255,201,77,.25)"></div></div>
   </div>
-  <div class="card" id="h2" style="left:80px;top:790px;width:920px">
-    <div class="hd">{icon('chart', 60)}<p class="ct">Похожие квартиры в доме</p></div>
-    <div style="position:relative;height:120px">
+  <div class="card" id="h2" style="left:65px;top:730px;width:950px">
+    <div class="hd">{icon('chart', 72)}<p class="ct">Похожие квартиры в доме</p></div>
+    <div style="position:relative;height:140px">
       <div style="position:absolute;left:0;right:0;top:40px;height:22px;border-radius:11px;background:linear-gradient(90deg,#CFE6FF,#8EC2FA,#CFE6FF)"></div>
       <div style="position:absolute;left:22%;width:50%;top:34px;height:34px;border-radius:17px;background:rgba(45,140,255,.35)"></div>
       <div id="mk" style="position:absolute;left:58%;top:12px;width:20px;height:80px;margin-left:-10px;border-radius:10px;background:#FFC94D;box-shadow:0 0 0 7px rgba(255,201,77,.3)"></div>
-      <div style="position:absolute;left:0;top:92px;font-size:28px;color:#2F4566">похожие</div>
-      <div id="mkl" style="position:absolute;left:58%;top:92px;margin-left:-70px;font-size:28px;font-weight:800;color:#0B2545">эта квартира</div>
+      <div style="position:absolute;left:0;top:92px;font-size:34px;color:#2F4566">похожие</div>
+      <div id="mkl" style="position:absolute;left:58%;top:92px;margin-left:-100px;font-size:36px;font-weight:800;color:#0B2545">эта квартира</div>
     </div>
   </div>
 </div>
 
 <div class="sc" id="s5">
   <span class="ex">Пример</span>
-  <div class="card" id="p1" style="left:80px;top:430px;width:920px">
-    <div class="hd">{icon('chart', 64)}<p class="ct">Цены в доме по сделкам</p></div>
-    <svg viewBox="0 0 840 300" width="840" height="300" style="display:block">
+  <div class="card" id="p1" style="left:65px;top:410px;width:950px">
+    <div class="hd">{icon('chart', 72)}<p class="ct">Цены в доме по сделкам</p></div>
+    <svg viewBox="0 0 840 300" width="870" height="310" style="display:block">
       <defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2D8CFF" stop-opacity=".35"/><stop offset="1" stop-color="#2D8CFF" stop-opacity="0"/></linearGradient>
       <clipPath id="clipL"><rect id="clipR" x="0" y="0" width="0" height="300"/></clipPath></defs>
       <g stroke="#D5E6FA" stroke-width="2"><line x1="0" y1="60" x2="840" y2="60"/><line x1="0" y1="150" x2="840" y2="150"/><line x1="0" y1="240" x2="840" y2="240"/></g>
@@ -201,42 +203,38 @@ HTML = f'''<!doctype html><html lang="ru"><head><meta charset="utf-8"><style>
         <g fill="#fff" stroke="#1768CE" stroke-width="6"><circle cx="120" cy="225" r="10"/><circle cx="360" cy="195" r="10"/><circle cx="600" cy="150" r="10"/><circle cx="840" cy="90" r="12" fill="#FFC94D"/></g>
       </g>
     </svg>
-    <div id="pch" style="position:absolute;right:40px;top:120px;background:#E7F7EF;color:#1F8A5B;font-size:40px;font-weight:800;border-radius:16px;padding:10px 20px">+8% за год</div>
+    <div id="pch" style="position:absolute;left:60px;top:190px;background:#E7F7EF;color:#1F8A5B;font-size:50px;font-weight:800;border-radius:16px;padding:10px 20px">+8% за год</div>
   </div>
 </div>
 
 <div class="sc" id="s6">
   <span class="ex">Пример</span>
-  <div class="card" id="r1" style="left:80px;top:470px;width:920px">
-    <div class="hd">{icon('home', 64)}<p class="ct">Перепродажи в доме</p></div>
-    <div class="row" style="margin:6px 0 22px"><span style="font-size:72px;font-weight:800;color:#1768CE">Часто</span><span class="lb" style="font-size:34px">чаще, чем в похожих домах</span></div>
-    <div style="display:flex;gap:14px;align-items:flex-end;height:140px">
-      <div class="rb" style="flex:1;height:30%;background:#CFE6FF;border-radius:10px"></div><div class="rb" style="flex:1;height:45%;background:#CFE6FF;border-radius:10px"></div>
-      <div class="rb" style="flex:1;height:40%;background:#CFE6FF;border-radius:10px"></div><div class="rb" style="flex:1;height:70%;background:#FFD36B;border-radius:10px"></div>
-      <div class="rb" style="flex:1;height:85%;background:#FFC94D;border-radius:10px"></div><div class="rb" style="flex:1;height:100%;background:#F2A93B;border-radius:10px"></div></div>
+  <div class="card" id="r1" style="left:65px;top:400px;width:950px">
+    <div class="hd">{icon('home', 72)}<p class="ct">Перепродажи в доме</p></div>
+    <div class="row" style="margin:4px 0 20px"><span style="font-size:90px;font-weight:800;color:#1768CE">Часто</span><span class="lb" style="font-size:40px;line-height:1.2">чаще, чем в похожих домах</span></div>
+    <div id="hg" style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px 18px;justify-items:center"><svg class="hs" viewBox="0 0 64 64" width="110" height="110"><path d="M8 30 L32 10 L56 30 L56 56 L8 56 Z" fill="#CFE6FF"/><rect x="26" y="38" width="12" height="18" rx="2" fill="#fff" opacity=".85"/><rect x="14" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/><rect x="41" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/></svg><svg class="hs" viewBox="0 0 64 64" width="110" height="110"><path d="M8 30 L32 10 L56 30 L56 56 L8 56 Z" fill="#CFE6FF"/><rect x="26" y="38" width="12" height="18" rx="2" fill="#fff" opacity=".85"/><rect x="14" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/><rect x="41" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/></svg><svg class="hs" viewBox="0 0 64 64" width="110" height="110"><path d="M8 30 L32 10 L56 30 L56 56 L8 56 Z" fill="#CFE6FF"/><rect x="26" y="38" width="12" height="18" rx="2" fill="#fff" opacity=".85"/><rect x="14" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/><rect x="41" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/></svg><svg class="hs" viewBox="0 0 64 64" width="110" height="110"><path d="M8 30 L32 10 L56 30 L56 56 L8 56 Z" fill="#CFE6FF"/><rect x="26" y="38" width="12" height="18" rx="2" fill="#fff" opacity=".85"/><rect x="14" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/><rect x="41" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/></svg><svg class="hs" viewBox="0 0 64 64" width="110" height="110"><path d="M8 30 L32 10 L56 30 L56 56 L8 56 Z" fill="#CFE6FF"/><rect x="26" y="38" width="12" height="18" rx="2" fill="#fff" opacity=".85"/><rect x="14" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/><rect x="41" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/></svg><svg class="hs" viewBox="0 0 64 64" width="110" height="110"><path d="M8 30 L32 10 L56 30 L56 56 L8 56 Z" fill="#CFE6FF"/><rect x="26" y="38" width="12" height="18" rx="2" fill="#fff" opacity=".85"/><rect x="14" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/><rect x="41" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/></svg><svg class="hs" viewBox="0 0 64 64" width="110" height="110"><path d="M8 30 L32 10 L56 30 L56 56 L8 56 Z" fill="#CFE6FF"/><rect x="26" y="38" width="12" height="18" rx="2" fill="#fff" opacity=".85"/><rect x="14" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/><rect x="41" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/></svg><svg class="hs" viewBox="0 0 64 64" width="110" height="110"><path d="M8 30 L32 10 L56 30 L56 56 L8 56 Z" fill="#CFE6FF"/><rect x="26" y="38" width="12" height="18" rx="2" fill="#fff" opacity=".85"/><rect x="14" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/><rect x="41" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/></svg><svg class="hs" viewBox="0 0 64 64" width="110" height="110"><path d="M8 30 L32 10 L56 30 L56 56 L8 56 Z" fill="#CFE6FF"/><rect x="26" y="38" width="12" height="18" rx="2" fill="#fff" opacity=".85"/><rect x="14" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/><rect x="41" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/></svg><svg class="hs" viewBox="0 0 64 64" width="110" height="110"><path d="M8 30 L32 10 L56 30 L56 56 L8 56 Z" fill="#CFE6FF"/><rect x="26" y="38" width="12" height="18" rx="2" fill="#fff" opacity=".85"/><rect x="14" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/><rect x="41" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/></svg><svg class="hs" viewBox="0 0 64 64" width="110" height="110"><path d="M8 30 L32 10 L56 30 L56 56 L8 56 Z" fill="#CFE6FF0"/><rect x="26" y="38" width="12" height="18" rx="2" fill="#fff" opacity=".85"/><rect x="14" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/><rect x="41" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/></svg><svg class="hs" viewBox="0 0 64 64" width="110" height="110"><path d="M8 30 L32 10 L56 30 L56 56 L8 56 Z" fill="#CFE6FF1"/><rect x="26" y="38" width="12" height="18" rx="2" fill="#fff" opacity=".85"/><rect x="14" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/><rect x="41" y="32" width="9" height="9" rx="2" fill="#fff" opacity=".85"/></svg></div>
   </div>
 </div>
 
 <div class="sc" id="s7">
   <span class="ex">Пример</span>
-  <div class="card" id="rv" style="left:80px;top:450px;width:920px">
-    <div class="hd">{icon('chat', 64)}<p class="ct">Отзывы о доме</p></div>
-    <div class="row" style="margin:4px 0 24px"><span style="font-size:72px;font-weight:800">4,2</span><span id="stars" style="font-size:60px;color:#FFC94D;letter-spacing:4px">★★★★<span style="color:#D5E6FA">★</span></span></div>
+  <div class="card" id="rv" style="left:65px;top:420px;width:950px">
+    <div class="hd">{icon('chat', 72)}<p class="ct">Отзывы о доме</p></div>
+    <div class="row" style="margin:4px 0 24px"><span style="font-size:90px;font-weight:800">4,2</span><span id="stars" style="font-size:72px;color:#FFC94D;letter-spacing:4px">★★★★<span style="color:#D5E6FA">★</span></span></div>
     <div style="display:flex;flex-wrap:wrap;gap:16px">
-      <span class="tag" style="font-size:34px;background:#E7F7EF;color:#1F6B47;border-radius:999px;padding:12px 24px">Тихий двор</span>
-      <span class="tag" style="font-size:34px;background:#E7F7EF;color:#1F6B47;border-radius:999px;padding:12px 24px">Рядом школа</span>
-      <span class="tag" style="font-size:34px;background:#FFF4D6;color:#7A5A12;border-radius:999px;padding:12px 24px">Мало парковки</span>
+      <span class="tag" style="font-size:42px;background:#E7F7EF;color:#1F6B47;border-radius:999px;padding:14px 28px">Тихий двор</span>
+      <span class="tag" style="font-size:42px;background:#E7F7EF;color:#1F6B47;border-radius:999px;padding:14px 28px">Рядом школа</span>
+      <span class="tag" style="font-size:42px;background:#FFF4D6;color:#7A5A12;border-radius:999px;padding:14px 28px">Мало парковки</span>
     </div>
   </div>
 </div>
 
 <div class="sc" id="s8">
-  <div style="position:absolute;left:80px;top:470px;width:720px">
-    <p class="big" style="margin:0 0 36px">Проверьте квартиру до покупки</p>
-    <p style="font-size:64px;font-weight:800;color:#1768CE;margin:0">homecheck.kz</p>
+  <div style="position:absolute;left:80px;top:420px;width:920px">
+    <p class="big" style="margin:0">Проверьте квартиру до покупки</p>
   </div>
-  <div id="fb" style="position:absolute;left:700px;top:560px;transform-origin:center bottom">{building(200, 6, 3, hi=(2, 1), uid='b7', trees=False)}</div>
-  <div id="mag7" style="position:absolute;left:740px;top:640px">{MAG}</div>
+  <div id="fb" style="position:absolute;left:250px;top:735px;transform-origin:center bottom">{building(300, 3, 4, hi=(1, 2), uid='b7')}</div>
+  <div id="mag7" style="position:absolute;left:530px;top:700px">{MAG.replace('width="150" height="150"','width="190" height="190"')}</div>
 </div>
 
 <div id="sub"><span id="subt"></span></div>
@@ -278,7 +276,8 @@ function setT(t){{
   op($('pch'),seg(t,15.8,16.1)); tr($('pch'),`scale(${{Math.max(0,pop(t,15.8,16.2))}})`);
   // S6 resales
   op($('r1'),seg(t,17.15,17.5)); tr($('r1'),`translateY(${{70*(1-seg(t,17.15,17.5))}}px)`);
-  document.querySelectorAll('#r1 .rb').forEach((e,k)=>{{e.style.transformOrigin='bottom';tr(e,`scaleY(${{seg(t,17.4+k*0.12,17.8+k*0.12)}})`)}});
+  const SOLD=[1,2,4,6,7,9,10]; document.querySelectorAll('#hg .hs path').forEach((e,k)=>{{const on=SOLD.includes(k)&&t>17.5+SOLD.indexOf(k)*0.18; e.setAttribute('fill', on?'#FFC94D':'#CFE6FF')}});
+  document.querySelectorAll('#hg .hs').forEach((e,k)=>{{const on=SOLD.includes(k); const v=on?pop(t,17.5+SOLD.indexOf(k)*0.18,17.8+SOLD.indexOf(k)*0.18):1; tr(e,`scale(${{on?0.85+0.15*Math.max(0,v):1}})`)}});
   // S7 reviews
   op($('rv'),seg(t,19.6,19.95)); tr($('rv'),`translateY(${{70*(1-seg(t,19.6,19.95))}}px)`);
   document.querySelectorAll('#rv .tag').forEach((e,k)=>{{op(e,seg(t,20.1+k*0.25,20.35+k*0.25)); tr(e,`scale(${{0.8+0.2*seg(t,20.1+k*0.25,20.35+k*0.25)}})`)}});
