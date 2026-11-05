@@ -1,5 +1,5 @@
 """Reels 2026-11-12: «Машину проверяют по VIN. А квартиру?»
-Голос — ElevenLabs Rina (voice_raw.mp3, 29,1 с, текст — voice.txt). Анимация кодом под паузы голоса,
+Голос — ElevenLabs Victoria (voice_v2.mp3, 24,5 с, текст — voice.txt; первая версия с Rina — voice_raw.mp3). Анимация кодом под паузы голоса,
 субтитры вшиты, 1080x1920, 30 fps. Безопасные зоны Reels: текст и важное — y 270..1248, x 65..1015.
 Запуск: python3 build_reel.py  -> reel.mp4, cover.jpg
 """
@@ -9,23 +9,22 @@ from playwright.sync_api import sync_playwright
 HERE = pathlib.Path(__file__).resolve().parent
 TPL = HERE.parents[1] / 'templates'
 FONT = base64.b64encode((TPL / 'fonts' / 'BarlowCondensed-Bold.ttf').read_bytes()).decode()
-FPS, DUR = 30, 29.9
+FPS, DUR = 30, 25.7
 sys.path.insert(0, str(TPL))
 FRAMES = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else HERE / '_frames'
 
 # Scenes follow the voice (silences detected with ffmpeg silencedetect).
-SCENES = [0.0, 3.72, 7.43, 11.15, 15.42, 20.10, 26.15, DUR]
+SCENES = [0.0, 3.47, 5.78, 8.70, 13.62, 17.17, 19.61, 21.57, DUR]
 SUBS = [
-    (0.00, 3.72, 'Перед покупкой машины проверяют её историю по VIN\u2011коду'),
-    (3.72, 7.43, 'А квартиру за десятки миллионов часто берут вслепую'),
-    (7.43, 11.15, 'Теперь квартиру тоже можно проверить — по адресу'),
-    (11.15, 13.12, 'Нашли квартиру в объявлении'),
-    (13.12, 15.42, 'введите её адрес на HomeCheck'),
-    (15.42, 18.30, 'Увидите, когда и сколько раз её продавали,'),
-    (18.30, 20.10, 'и сделки в этом доме'),
-    (20.10, 23.70, 'HomeCheck сравнит её с похожими квартирами в том же доме'),
-    (23.70, 26.15, 'и подскажет, о чём спросить продавца'),
-    (26.15, DUR, 'Проверьте квартиру, как проверяете машину'),
+    (0.00, 3.47, 'Перед покупкой машины проверяют её историю по VIN\u2011коду'),
+    (3.47, 5.78, 'Квартиру часто берут вслепую'),
+    (5.78, 8.70, 'Нашли квартиру — введите адрес на HomeCheck'),
+    (8.70, 10.60, 'Узнаете, за сколько её продавали,'),
+    (10.60, 13.62, 'и сравните с похожими квартирами в этом доме'),
+    (13.62, 17.17, 'Увидите, как меняются цены в доме по реальным сделкам'),
+    (17.17, 19.61, 'Как часто здесь перепродают квартиры'),
+    (19.61, 21.57, 'И что пишут о доме жильцы'),
+    (21.57, DUR, 'Проверьте квартиру, как проверяете машину'),
 ]
 
 def CAR():
@@ -150,14 +149,6 @@ HTML = f'''<!doctype html><html lang="ru"><head><meta charset="utf-8"><style>
 </div>
 
 <div class="sc" id="s3">
-  <div class="card" id="c3a" style="left:120px;top:500px;width:840px"><div class="hd">{icon('car', 72)}<p class="ct">История авто</p></div>
-    <div class="row">{CHECK}<span>Проверено по VIN&#8209;коду</span></div></div>
-  <div class="card" id="c3b" style="left:120px;top:500px;width:840px"><div class="hd">{icon('home', 72)}<p class="ct">История квартиры</p></div>
-    <div class="row">{icon('pin', 44)}<span>Проверка по адресу</span></div></div>
-  <div id="mag3" style="position:absolute;left:760px;top:690px">{MAG}</div>
-</div>
-
-<div class="sc" id="s4">
   <div id="phone" style="position:absolute;left:80px;top:410px;width:400px;height:640px;background:linear-gradient(160deg,#1F4E8C,#0B2545);border-radius:56px;padding:20px;box-shadow:0 30px 60px rgba(11,37,69,.3)">
     <div style="background:#fff;border-radius:38px;height:100%;padding:22px;position:relative;overflow:hidden">
       <div style="position:absolute;left:50%;top:10px;width:110px;height:24px;margin-left:-55px;background:#0B2545;border-radius:12px"></div>
@@ -174,39 +165,72 @@ HTML = f'''<!doctype html><html lang="ru"><head><meta charset="utf-8"><style>
   </div>
 </div>
 
+<div class="sc" id="s4">
+  <span class="ex">Пример</span>
+  <div class="card" id="h1" style="left:80px;top:420px;width:920px">
+    <div class="hd">{icon('home', 64)}<p class="ct">История квартиры</p></div>
+    <div class="row" style="margin:8px 0"><span style="font-size:68px;font-weight:800;color:#1768CE">2 раза</span><span class="lb" style="font-size:36px">продавали</span></div>
+    <div style="display:flex;align-items:center;margin-top:12px">
+      <div style="width:30px;height:30px;border-radius:50%;background:#2D8CFF;box-shadow:0 0 0 8px rgba(45,140,255,.18)"></div><div style="flex:1;height:8px;border-radius:4px;background:linear-gradient(90deg,#2D8CFF,#8EC2FA)"></div>
+      <div style="width:30px;height:30px;border-radius:50%;background:#2D8CFF;box-shadow:0 0 0 8px rgba(45,140,255,.18)"></div><div style="flex:1;height:8px;border-radius:4px;background:linear-gradient(90deg,#8EC2FA,#FFD36B)"></div>
+      <div style="width:30px;height:30px;border-radius:50%;background:#FFC94D;box-shadow:0 0 0 8px rgba(255,201,77,.25)"></div></div>
+  </div>
+  <div class="card" id="h2" style="left:80px;top:790px;width:920px">
+    <div class="hd">{icon('chart', 60)}<p class="ct">Похожие квартиры в доме</p></div>
+    <div style="position:relative;height:120px">
+      <div style="position:absolute;left:0;right:0;top:40px;height:22px;border-radius:11px;background:linear-gradient(90deg,#CFE6FF,#8EC2FA,#CFE6FF)"></div>
+      <div style="position:absolute;left:22%;width:50%;top:34px;height:34px;border-radius:17px;background:rgba(45,140,255,.35)"></div>
+      <div id="mk" style="position:absolute;left:58%;top:12px;width:20px;height:80px;margin-left:-10px;border-radius:10px;background:#FFC94D;box-shadow:0 0 0 7px rgba(255,201,77,.3)"></div>
+      <div style="position:absolute;left:0;top:92px;font-size:28px;color:#2F4566">похожие</div>
+      <div id="mkl" style="position:absolute;left:58%;top:92px;margin-left:-70px;font-size:28px;font-weight:800;color:#0B2545">эта квартира</div>
+    </div>
+  </div>
+</div>
+
 <div class="sc" id="s5">
   <span class="ex">Пример</span>
-  <div class="card" id="h1" style="left:80px;top:430px;width:920px">
-    <div class="hd">{icon('home', 64)}<p class="ct">История квартиры</p></div>
-    <div class="row"><span style="font-size:72px;font-weight:800;color:#1768CE">2 раза</span><span class="lb" style="font-size:36px">продавали</span></div>
-    <div style="display:flex;align-items:center;margin-top:18px">
-      <div class="dot" style="width:34px;height:34px;border-radius:50%;background:#2D8CFF;box-shadow:0 0 0 8px rgba(45,140,255,.18)"></div><div style="flex:1;height:8px;border-radius:4px;background:linear-gradient(90deg,#2D8CFF,#8EC2FA)"></div>
-      <div style="width:34px;height:34px;border-radius:50%;background:#2D8CFF;box-shadow:0 0 0 8px rgba(45,140,255,.18)"></div><div style="flex:1;height:8px;border-radius:4px;background:linear-gradient(90deg,#8EC2FA,#FFD36B)"></div>
-      <div style="width:34px;height:34px;border-radius:50%;background:#FFC94D;box-shadow:0 0 0 8px rgba(255,201,77,.25)"></div></div>
-    <div style="display:flex;justify-content:space-between;font-size:28px;color:#2F4566;margin-top:14px"><span>Продажа</span><span>Продажа</span><span>Сейчас</span></div>
-  </div>
-  <div class="card" id="h2" style="left:80px;top:860px;width:920px;padding:28px 40px">
-    <div class="row" style="margin:0">{icon('chart', 64)}<span style="font-size:72px;font-weight:800;color:#1768CE">63</span><span style="font-size:40px">сделки в доме</span></div>
+  <div class="card" id="p1" style="left:80px;top:430px;width:920px">
+    <div class="hd">{icon('chart', 64)}<p class="ct">Цены в доме по сделкам</p></div>
+    <svg viewBox="0 0 840 300" width="840" height="300" style="display:block">
+      <defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2D8CFF" stop-opacity=".35"/><stop offset="1" stop-color="#2D8CFF" stop-opacity="0"/></linearGradient>
+      <clipPath id="clipL"><rect id="clipR" x="0" y="0" width="0" height="300"/></clipPath></defs>
+      <g stroke="#D5E6FA" stroke-width="2"><line x1="0" y1="60" x2="840" y2="60"/><line x1="0" y1="150" x2="840" y2="150"/><line x1="0" y1="240" x2="840" y2="240"/></g>
+      <g clip-path="url(#clipL)">
+        <path d="M0 240 L120 225 L240 230 L360 195 L480 180 L600 150 L720 120 L840 90 L840 300 L0 300Z" fill="url(#ar)"/>
+        <path d="M0 240 L120 225 L240 230 L360 195 L480 180 L600 150 L720 120 L840 90" fill="none" stroke="#1768CE" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <g fill="#fff" stroke="#1768CE" stroke-width="6"><circle cx="120" cy="225" r="10"/><circle cx="360" cy="195" r="10"/><circle cx="600" cy="150" r="10"/><circle cx="840" cy="90" r="12" fill="#FFC94D"/></g>
+      </g>
+    </svg>
+    <div id="pch" style="position:absolute;right:40px;top:120px;background:#E7F7EF;color:#1F8A5B;font-size:40px;font-weight:800;border-radius:16px;padding:10px 20px">+8% за год</div>
   </div>
 </div>
 
 <div class="sc" id="s6">
   <span class="ex">Пример</span>
-  <div class="card" id="k1" style="left:80px;top:410px;width:920px">
-    <div class="hd">{icon('chart', 60)}<p class="ct">Похожие квартиры в доме</p></div>
-    <div style="display:flex;gap:18px;align-items:flex-end;height:130px">
-      <div class="bar" style="flex:1;height:62%;background:linear-gradient(#B9D9FB,#8EC2FA);border-radius:12px"></div><div class="bar" style="flex:1;height:80%;background:linear-gradient(#B9D9FB,#8EC2FA);border-radius:12px"></div>
-      <div class="bar" style="flex:1;height:100%;background:linear-gradient(#5AB0FF,#1768CE);border-radius:12px;box-shadow:0 0 0 6px rgba(45,140,255,.18)"></div><div class="bar" style="flex:1;height:72%;background:linear-gradient(#B9D9FB,#8EC2FA);border-radius:12px"></div>
-      <div class="bar" style="flex:1;height:88%;background:linear-gradient(#B9D9FB,#8EC2FA);border-radius:12px"></div></div>
-  </div>
-  <div class="card" id="k2" style="left:80px;top:720px;width:920px;background:linear-gradient(180deg,#FFFFFF,#FFF8E6)">
-    <div class="hd">{icon('chat', 60)}<p class="ct">О чём спросить продавца</p></div>
-    <div class="row" id="q1" style="font-size:36px;background:#EAF3FF;border-radius:20px;padding:14px 20px;margin:12px 0">Почему продаёте через год после покупки?</div>
-    <div class="row" id="q2" style="font-size:36px;background:#EAF3FF;border-radius:20px;padding:14px 20px;margin:12px 0">Почему в доме часто перепродают?</div>
+  <div class="card" id="r1" style="left:80px;top:470px;width:920px">
+    <div class="hd">{icon('home', 64)}<p class="ct">Перепродажи в доме</p></div>
+    <div class="row" style="margin:6px 0 22px"><span style="font-size:72px;font-weight:800;color:#1768CE">Часто</span><span class="lb" style="font-size:34px">чаще, чем в похожих домах</span></div>
+    <div style="display:flex;gap:14px;align-items:flex-end;height:140px">
+      <div class="rb" style="flex:1;height:30%;background:#CFE6FF;border-radius:10px"></div><div class="rb" style="flex:1;height:45%;background:#CFE6FF;border-radius:10px"></div>
+      <div class="rb" style="flex:1;height:40%;background:#CFE6FF;border-radius:10px"></div><div class="rb" style="flex:1;height:70%;background:#FFD36B;border-radius:10px"></div>
+      <div class="rb" style="flex:1;height:85%;background:#FFC94D;border-radius:10px"></div><div class="rb" style="flex:1;height:100%;background:#F2A93B;border-radius:10px"></div></div>
   </div>
 </div>
 
 <div class="sc" id="s7">
+  <span class="ex">Пример</span>
+  <div class="card" id="rv" style="left:80px;top:450px;width:920px">
+    <div class="hd">{icon('chat', 64)}<p class="ct">Отзывы о доме</p></div>
+    <div class="row" style="margin:4px 0 24px"><span style="font-size:72px;font-weight:800">4,2</span><span id="stars" style="font-size:60px;color:#FFC94D;letter-spacing:4px">★★★★<span style="color:#D5E6FA">★</span></span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px">
+      <span class="tag" style="font-size:34px;background:#E7F7EF;color:#1F6B47;border-radius:999px;padding:12px 24px">Тихий двор</span>
+      <span class="tag" style="font-size:34px;background:#E7F7EF;color:#1F6B47;border-radius:999px;padding:12px 24px">Рядом школа</span>
+      <span class="tag" style="font-size:34px;background:#FFF4D6;color:#7A5A12;border-radius:999px;padding:12px 24px">Мало парковки</span>
+    </div>
+  </div>
+</div>
+
+<div class="sc" id="s8">
   <div style="position:absolute;left:80px;top:470px;width:720px">
     <p class="big" style="margin:0 0 36px">Проверьте квартиру до покупки</p>
     <p style="font-size:64px;font-weight:800;color:#1768CE;margin:0">homecheck.kz</p>
@@ -226,41 +250,41 @@ const $=id=>document.getElementById(id);
 function op(el,v){{el.style.opacity=v}}
 function tr(el,s){{el.style.transform=s}}
 function setT(t){{
-  for(let i=1;i<=7;i++){{const a=SC[i-1],b=SC[i];const fi=i==1?1:seg(t,a-0.15,a+0.2),fo=i==7?1:1-seg(t,b-0.2,b+0.15);op($('s'+i),Math.min(fi,fo))}}
+  for(let i=1;i<=8;i++){{const a=SC[i-1],b=SC[i];const fi=i==1?1:seg(t,a-0.12,a+0.15),fo=i==8?1:1-seg(t,b-0.15,b+0.12);op($('s'+i),Math.min(fi,fo))}}
   tr($('g1'),`translate(${{40*Math.sin(t*.35)}}px,${{30*Math.cos(t*.3)}}px)`); tr($('g2'),`translate(${{-40*Math.sin(t*.3)}}px,${{25*Math.sin(t*.4)}}px)`);
   tr($('sky'),`translateX(${{-8*t}}px) scale(1.05)`);
-  // S1
-  const d=seg(t,0,0.9); tr($('car'),`translateX(${{-640*(1-d)}}px) translateY(${{3*Math.sin(t*18)*(1-d)}}px)`);
+  // S1 car + VIN card
+  const d=seg(t,0,0.7); tr($('car'),`translateX(${{-640*(1-d)}}px)`);
   document.querySelectorAll('#car .spoke').forEach((e,k)=>{{const cx=k?420:140;e.setAttribute('transform',`rotate(${{-720*d}} ${{cx}} 214)`)}});
-  op($('vin'),seg(t,0.5,1.0)); tr($('vin'),`scale(${{pop(t,0.5,1.0)*0.15+0.85}})`);
-  ['v1','v2','v3'].forEach((id,k)=>{{op($(id),seg(t,1.1+k*0.5,1.4+k*0.5)); tr($(id),`translateX(${{30*(1-seg(t,1.1+k*0.5,1.4+k*0.5))}}px)`)}});
-  // S2
-  tr($('bld'),`translateY(${{140*(1-seg(t,3.6,4.5))}}px)`); op($('bld'),seg(t,3.6,4.2));
-  const p=pop(t,4.6,5.2); tr($('q'),`scale(${{Math.max(0,p)}}) rotate(${{4*Math.sin(t*3)}}deg)`); op($('q'),cl((t-4.6)/0.2));
-  // S3
-  const f=seg(t,8.0,8.7); tr($('c3a'),`perspective(1200px) rotateY(${{90*f}}deg)`); op($('c3a'),f<1?1:0);
-  const g=seg(t,8.7,9.4); tr($('c3b'),`perspective(1200px) rotateY(${{-90*(1-g)}}deg)`); op($('c3b'),g>0?1:0);
-  op($('mag3'),seg(t,9.4,9.8)); tr($('mag3'),`translate(${{-60*seg(t,9.4,10.8)}}px,${{-20*Math.sin(t*2)}}px)`);
-  // S4
-  op($('phone'),seg(t,11.1,11.6)); tr($('phone'),`translateY(${{60*(1-seg(t,11.1,11.7))}}px)`);
-  op($('field'),seg(t,12.3,12.8)); tr($('field'),`scale(${{0.85+0.15*pop(t,12.3,12.9)}})`);
-  const m=seg(t,12.6,13.4); op($('chip'),t>12.5&&t<13.5?1:0);
+  op($('vin'),seg(t,0.4,0.8)); tr($('vin'),`scale(${{pop(t,0.4,0.8)*0.15+0.85}})`);
+  ['v1','v2','v3'].forEach((id,k)=>{{op($(id),seg(t,0.9+k*0.4,1.2+k*0.4)); tr($(id),`translateX(${{30*(1-seg(t,0.9+k*0.4,1.2+k*0.4))}}px)`)}});
+  // S2 building + question
+  tr($('bld'),`translateY(${{140*(1-seg(t,3.4,4.0))}}px)`); op($('bld'),seg(t,3.4,3.9));
+  const p=pop(t,4.0,4.5); tr($('q'),`scale(${{Math.max(0,p)}}) rotate(${{4*Math.sin(t*3)}}deg)`); op($('q'),cl((t-4.0)/0.15));
+  // S3 phone -> HomeCheck
+  op($('phone'),seg(t,5.7,6.1)); tr($('phone'),`translateY(${{60*(1-seg(t,5.7,6.2))}}px)`);
+  op($('field'),seg(t,6.2,6.6)); tr($('field'),`scale(${{0.85+0.15*pop(t,6.2,6.7)}})`);
+  const m=seg(t,6.6,7.3); op($('chip'),t>6.5&&t<7.4?1:0);
   tr($('chip'),`translate(${{m*520}}px,${{-m*240 - 120*Math.sin(m*Math.PI)}}px) scale(${{1-0.15*m}})`);
-  const txt='Адрес квартиры'; const n=Math.floor(txt.length*cl((t-13.4)/0.8)); $('typed').textContent=txt.slice(0,n);
+  const txt='Адрес квартиры'; const n=Math.floor(txt.length*cl((t-7.3)/0.7)); $('typed').textContent=txt.slice(0,n);
   op($('caret'),(Math.floor(t*2.5)%2)?1:0.15);
-  // S5
-  tr($('h1'),`translateY(${{70*(1-seg(t,15.5,16.1))}}px)`); op($('h1'),seg(t,15.5,16.1));
-  tr($('h2'),`translateY(${{70*(1-seg(t,18.2,18.8))}}px)`); op($('h2'),seg(t,18.2,18.8));
-  // S6
-  op($('k1'),seg(t,20.2,20.8)); tr($('k1'),`translateY(${{70*(1-seg(t,20.2,20.8))}}px)`);
-  document.querySelectorAll('#k1 .bar').forEach((e,k)=>tr(e,`scaleY(${{seg(t,20.5+k*0.12,21.0+k*0.12)}})`));
-  document.querySelectorAll('#k1 .bar').forEach(e=>e.style.transformOrigin='bottom');
-  op($('k2'),seg(t,23.5,24.1)); tr($('k2'),`translateY(${{70*(1-seg(t,23.5,24.1))}}px)`);
-  op($('q1'),seg(t,24.0,24.4)); tr($('q1'),`translateX(${{40*(1-seg(t,24.0,24.4))}}px)`);
-  op($('q2'),seg(t,24.7,25.1)); tr($('q2'),`translateX(${{40*(1-seg(t,24.7,25.1))}}px)`);
-  // S7
-  tr($('fb'),`scale(${{0.9+0.1*pop(t,26.3,27.0)}})`);
-  op($('mag7'),seg(t,26.9,27.3)); tr($('mag7'),`translate(${{20*Math.sin(t*1.6)}}px,${{12*Math.cos(t*1.6)}}px)`);
+  // S4 history + comparison
+  op($('h1'),seg(t,8.7,9.1)); tr($('h1'),`translateY(${{70*(1-seg(t,8.7,9.1))}}px)`);
+  op($('h2'),seg(t,10.5,10.9)); tr($('h2'),`translateY(${{70*(1-seg(t,10.5,10.9))}}px)`);
+  const mk=seg(t,11.0,11.8); $('mk').style.left=(10+48*mk)+'%'; $('mkl').style.left=(10+48*mk)+'%'; op($('mkl'),seg(t,11.6,11.9));
+  // S5 price line draws
+  op($('p1'),seg(t,13.6,14.0)); tr($('p1'),`translateY(${{70*(1-seg(t,13.6,14.0))}}px)`);
+  $('clipR').setAttribute('width', 860*seg(t,14.0,15.8));
+  op($('pch'),seg(t,15.8,16.1)); tr($('pch'),`scale(${{Math.max(0,pop(t,15.8,16.2))}})`);
+  // S6 resales
+  op($('r1'),seg(t,17.15,17.5)); tr($('r1'),`translateY(${{70*(1-seg(t,17.15,17.5))}}px)`);
+  document.querySelectorAll('#r1 .rb').forEach((e,k)=>{{e.style.transformOrigin='bottom';tr(e,`scaleY(${{seg(t,17.4+k*0.12,17.8+k*0.12)}})`)}});
+  // S7 reviews
+  op($('rv'),seg(t,19.6,19.95)); tr($('rv'),`translateY(${{70*(1-seg(t,19.6,19.95))}}px)`);
+  document.querySelectorAll('#rv .tag').forEach((e,k)=>{{op(e,seg(t,20.1+k*0.25,20.35+k*0.25)); tr(e,`scale(${{0.8+0.2*seg(t,20.1+k*0.25,20.35+k*0.25)}})`)}});
+  // S8 final
+  tr($('fb'),`scale(${{0.9+0.1*pop(t,21.7,22.3)}})`);
+  op($('mag7'),seg(t,22.2,22.6)); tr($('mag7'),`translate(${{20*Math.sin(t*1.6)}}px,${{12*Math.cos(t*1.6)}}px)`);
   const s=SUBS.find(x=>t>=x[0]&&t<x[1]); $('subt').textContent=s?s[2]:''; $('sub').style.opacity=s?1:0;
 }}
 window.setT=setT;
@@ -313,7 +337,7 @@ if __name__ == '__main__':
         cover(pg, HERE / 'cover.jpg', HTML_)
         b.close()
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-framerate', str(FPS), '-i', str(FRAMES / '%04d.png'),
-                    '-i', str(HERE / 'voice_raw.mp3'),
+                    '-i', str(HERE / 'voice_v2.mp3'),
                     '-filter_complex', '[1:a]loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000,apad[a]',
                     '-map', '0:v', '-map', '[a]', '-t', str(DUR),
                     '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '20', '-pix_fmt', 'yuv420p', '-profile:v', 'high',
