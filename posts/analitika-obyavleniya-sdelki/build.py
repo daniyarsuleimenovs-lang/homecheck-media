@@ -26,7 +26,7 @@ body{{margin:0}}
 .p b{{font-weight:800}}
 .lb{{margin:0;font-size:38px;line-height:1.3;opacity:.8}}
 .y{{color:{YEL}}} .bl{{color:{BLUE}}}
-.card{{background:#fff;border-radius:36px;box-shadow:0 24px 60px rgba(11,37,69,.18);color:{NAVY}}}
+.card{{box-sizing:border-box;background:#fff;border-radius:36px;box-shadow:0 24px 60px rgba(11,37,69,.18);color:{NAVY}}}
 """
 
 def logo():
