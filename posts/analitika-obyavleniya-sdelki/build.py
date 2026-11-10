@@ -96,7 +96,7 @@ def compare2():
 
 
 def benefits():
-    items = ['Возможность сэкономить', 'Аргументы в разговоре о&nbsp;цене', 'История квартиры до&nbsp;сделки']
+    items = ['Возможность сэкономить', 'История квартиры до&nbsp;сделки', 'Решение на реальных данных']
     check = (f'<svg viewBox="0 0 24 24" width="72" height="72" style="flex:none"><circle cx="12" cy="12" r="12" fill="{BLUE}"/>'
              '<path d="M6.5 12.5 L10.5 16 L17.5 8.5" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>')
     rows = ''.join(f'<div style="display:flex;gap:34px;align-items:center;padding:42px 0;border-top:3px solid rgba(23,104,206,.18)">'
