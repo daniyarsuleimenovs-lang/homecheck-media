@@ -96,18 +96,13 @@ def compare2():
 
 
 def benefits():
-    items = [('Цены сделок в доме', 'за сколько реально продавали'),
-             ('Сравнение цены продавца', 'со сделками в этом доме'),
-             ('История квартиры', 'когда и сколько раз продавали'),
-             ('Вопросы для переговоров', 'что уточнить до сделки')]
-    rows = ''.join(
-        f'<div style="display:flex;gap:28px;align-items:center;background:#fff;border-radius:28px;padding:18px 28px;box-shadow:0 14px 34px rgba(11,37,69,.12)">'
-        f'<div style="width:64px;height:64px;flex:none;border-radius:50%;background:{BLUE};color:#fff;font-size:40px;font-weight:800;display:flex;align-items:center;justify-content:center">✓</div>'
-        f'<div><div style="font-size:46px;font-weight:800;line-height:1.15">{t}</div><div style="font-size:38px;color:#2F4566;line-height:1.25">{d}</div></div></div>'
-        for t, d in items)
-    return (f'<div class="box" style="top:200px;gap:20px"><h2 class="t" style="font-size:84px;white-space:nowrap">Что даёт HomeCheck</h2>{rows}'
-            f'<div style="background:{NAVY};color:#fff;border-radius:28px;padding:24px 30px;font-size:42px;font-weight:800;line-height:1.22">'
-            f'Зная цены сделок в доме, проще обсуждать цену с продавцом и <span class="y">искать возможность сэкономить</span></div></div>')
+    items = ['Возможность сэкономить', 'Аргументы в разговоре о&nbsp;цене', 'История квартиры до&nbsp;сделки']
+    check = (f'<svg viewBox="0 0 24 24" width="72" height="72" style="flex:none"><circle cx="12" cy="12" r="12" fill="{BLUE}"/>'
+             '<path d="M6.5 12.5 L10.5 16 L17.5 8.5" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+    rows = ''.join(f'<div style="display:flex;gap:34px;align-items:center;padding:42px 0;border-top:3px solid rgba(23,104,206,.18)">'
+                   f'{check}<span style="font-size:60px;font-weight:800;line-height:1.15">{t}</span></div>' for t in items)
+    return (f'<div class="box" style="top:220px;gap:30px"><h2 class="t">Что это даёт покупателю</h2>'
+            f'<div style="margin-top:30px">{rows}</div></div>')
 
 
 def money():
