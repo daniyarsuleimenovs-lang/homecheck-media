@@ -101,7 +101,7 @@ SLIDES = [
     page('blue', '<div class="box" style="top:250px"><h2 class="t">В пересчёте на квартиру — несколько миллионов&nbsp;₸</h2>'
          '<p class="lb" style="opacity:.9">На разницу могут влиять переговоры, комплектация и условия расчётов.</p></div>' + money()),
     page('light', '<div class="box" style="top:220px"><h2 class="t">Уже выбрали квартиру? Проверьте её в&nbsp;HomeCheck.kz</h2>'
-         '<p class="lb">Объявления: raimbekovm / Astana Real Estate, CC BY 4.0. Расчёты: HomeCheck.kz.</p></div>' + search()),
+         '</div>' + search()),
 ]
 
 if __name__ == '__main__':
