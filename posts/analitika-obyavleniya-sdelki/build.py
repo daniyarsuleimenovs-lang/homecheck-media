@@ -74,6 +74,42 @@ def compare(name, a, s, pct):
             f'{bar(ha, "#FFFFFF", "Объявления", a, NAVY)}{bar(hs, BLUE, "Сделки", s, NAVY)}</div>'
             f'<div style="position:absolute;right:80px;bottom:{90 + 60 + hs + 120}px;background:{YEL};color:{NAVY};font-size:80px;font-weight:800;border-radius:28px;padding:18px 34px;box-shadow:0 16px 36px rgba(11,37,69,.2)">−{pct}%</div>')
 
+def compare2():
+    pairs = [('Жайна', 508, 426, 16), ('Аспан', 529, 466, 12)]
+    hmax = 420
+    groups = []
+    for name, a, d, pct in pairs:
+        hd = round(hmax * d / a)
+        bar = lambda h, color, val: (f'<div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;width:190px">'
+            f'<div style="font-size:46px;font-weight:800;margin-bottom:12px">{val}</div>'
+            f'<div style="width:170px;height:{h}px;border-radius:24px 24px 0 0;background:{color}"></div></div>')
+        groups.append(f'<div style="display:flex;flex-direction:column;align-items:center;position:relative">'
+            f'<div style="position:absolute;top:-95px;right:-10px;background:{YEL};font-size:50px;font-weight:800;border-radius:20px;padding:8px 20px;box-shadow:0 12px 28px rgba(11,37,69,.18);z-index:2">−{pct}%</div>'
+            f'<div style="display:flex;gap:16px;align-items:flex-end;height:{hmax + 70}px">{bar(hmax, "#FFFFFF", a)}{bar(hd, BLUE, d)}</div>'
+            f'<div style="font-size:46px;font-weight:800;margin-top:18px">ЖК «{name}»</div></div>')
+    legend = (f'<div style="display:flex;gap:40px;font-size:38px;align-items:center">'
+              f'<span style="display:flex;gap:14px;align-items:center"><i style="width:34px;height:34px;border-radius:8px;background:#fff;display:inline-block"></i>Объявления</span>'
+              f'<span style="display:flex;gap:14px;align-items:center"><i style="width:34px;height:34px;border-radius:8px;background:{BLUE};display:inline-block"></i>Сделки</span></div>')
+    return (f'<div class="box" style="top:210px;gap:22px"><h2 class="t">Примеры по ЖК</h2>'
+            f'<p class="lb">Средняя цена за м², тыс. ₸</p>{legend}</div>'
+            f'<div style="position:absolute;left:80px;right:80px;bottom:60px;display:flex;justify-content:space-around;align-items:flex-end">{"".join(groups)}</div>')
+
+
+def benefits():
+    items = [('Цены сделок в доме', 'за сколько реально продавали'),
+             ('Сравнение цены продавца', 'со сделками в этом доме'),
+             ('История квартиры', 'когда и сколько раз продавали'),
+             ('Вопросы для переговоров', 'что уточнить до сделки')]
+    rows = ''.join(
+        f'<div style="display:flex;gap:28px;align-items:center;background:#fff;border-radius:28px;padding:18px 28px;box-shadow:0 14px 34px rgba(11,37,69,.12)">'
+        f'<div style="width:64px;height:64px;flex:none;border-radius:50%;background:{BLUE};color:#fff;font-size:40px;font-weight:800;display:flex;align-items:center;justify-content:center">✓</div>'
+        f'<div><div style="font-size:46px;font-weight:800;line-height:1.15">{t}</div><div style="font-size:38px;color:#2F4566;line-height:1.25">{d}</div></div></div>'
+        for t, d in items)
+    return (f'<div class="box" style="top:200px;gap:20px"><h2 class="t" style="font-size:84px;white-space:nowrap">Что даёт HomeCheck</h2>{rows}'
+            f'<div style="background:{NAVY};color:#fff;border-radius:28px;padding:24px 30px;font-size:42px;font-weight:800;line-height:1.22">'
+            f'Зная цены сделок в доме, проще обсуждать цену с продавцом и <span class="y">искать возможность сэкономить</span></div></div>')
+
+
 def money():
     coins = ''.join(f'<div style="position:absolute;left:{x}px;bottom:{k*34}px;width:220px;height:60px;border-radius:50%;background:{YEL};box-shadow:inset 0 -10px 0 #E8A92E"></div>'
                     for x, n in [(120, 7), (420, 10), (720, 5)] for k in range(n))
@@ -96,11 +132,11 @@ SLIDES = [
     page('blue', '<div class="box" style="top:250px;gap:24px"><p class="lb" style="opacity:.9">Средняя разница по домам</p>'
          '<p style="margin:0;font-size:260px;line-height:1;font-weight:800;letter-spacing:-.03em" class="y">≈16%</p>'
          '<p class="p">В отдельных домах наблюдался разрыв <b>около 30%</b>.</p></div>' + houses_bar()),
-    page('light', compare('Жайна', 508, 426, 16)),
-    page('light', compare('Аспан', 529, 466, 12)),
+    page('light', compare2()),
     page('blue', '<div class="box" style="top:250px"><h2 class="t">В пересчёте на квартиру — несколько миллионов&nbsp;₸</h2>'
          '<p class="lb" style="opacity:.9">На разницу могут влиять переговоры, комплектация и условия расчётов.</p></div>' + money()),
-    page('light', '<div class="box" style="top:220px"><h2 class="t">Уже выбрали квартиру? Проверьте её в&nbsp;HomeCheck.kz</h2>'
+    page('light', benefits()),
+    page('blue', '<div class="box" style="top:220px"><h2 class="t">Уже выбрали квартиру? Проверьте её в&nbsp;HomeCheck.kz</h2>'
          '</div>' + search()),
 ]
 
