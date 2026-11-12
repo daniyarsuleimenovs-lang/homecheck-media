@@ -39,6 +39,19 @@ if __name__ == '__main__':
     # final: obelisk with HIGHVILL ASTANA, 4:5
     fin = grade(Image.open(P2).crop((0, 120, 1449, 120 + 1811))).resize((1080, 1350), Image.LANCZOS)
     recolor_sky(fin).save(OUT / 'final.jpg', quality=92)
+    # full-bleed backgrounds for slides 2-6 (v2, 13.11). Low-res photos are upscaled with EDSR beforehand (UP dir)
+    def full(im, box, g=True, sky=False):
+        im = im.convert('RGB').crop(box)
+        im = grade(im) if g else im
+        im = im.resize((1080, 1350), Image.LANCZOS)
+        return recolor_sky(im) if sky else im
+    UP = pathlib.Path(sys.argv[2]) if len(sys.argv) > 2 else None
+    if UP:
+        full(Image.open(UP / 'p6.png'), (600, 0, 1800, 1500), g=False).save(OUT / 'b2.jpg', quality=92)   # fountain, summer
+        full(Image.open(UP / 'p3.png'), (0, 0, 1474, 1842), g=False).save(OUT / 'b4.jpg', quality=92)      # sunny towers
+        full(Image.open(UP / 'p5.png'), (275, 0, 1600, 1656), g=False).save(OUT / 'b6.jpg', quality=92)    # street, clouds
+    full(Image.open(P4), (520, 0, 1680, 1450), sky=True).save(OUT / 'b3.jpg', quality=92)                   # gate, no shop/people
+    full(Image.open(P2), (0, 0, 1449, 1811), sky=True).save(OUT / 'b5.jpg', quality=92)                     # towers + obelisk
     # cards 920x510 (≈1.8:1)
     card(P3, (0, 300, 828, 300 + 459), g=False).save(OUT / 'c2.jpg', quality=92)        # sunny towers
     card(P4, (440, 140, 1640, 140 + 666)).save(OUT / 'c3.jpg', quality=92)               # gate + pine, no people/shop

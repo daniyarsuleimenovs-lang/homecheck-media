@@ -18,6 +18,7 @@ CSS = f"""
    background:linear-gradient(180deg,#DCEBFB 0%,#C9DFF6 100%)}}
 .bg{{position:absolute;inset:0;width:1080px;height:1350px;object-fit:cover}}
 .fade{{position:absolute;left:0;top:0;width:1080px;height:640px;background:linear-gradient(180deg,rgba(220,235,251,.97) 0%,rgba(220,235,251,.9) 45%,rgba(220,235,251,0) 100%)}}
+.fade2{{position:absolute;left:0;top:0;width:1080px;height:800px;background:linear-gradient(180deg,rgba(220,235,251,.96) 0px,rgba(220,235,251,.93) 540px,rgba(220,235,251,0) 800px)}}
 .logo{{position:absolute;left:80px;top:64px;font-family:'Barlow Condensed';font-size:64px;font-weight:700;line-height:1;z-index:5}}
 .logo .h{{color:#12253E}} .logo .c{{color:#049BE1}}
 .box{{position:absolute;left:80px;top:200px;width:920px;display:flex;flex-direction:column;z-index:4}}
@@ -54,10 +55,18 @@ def tag(x, y, n, l, px, py):
             f'<div class="tag" style="left:{x}px;top:{y}px;transform:translate({"-100%" if x > 540 else "0"},-50%)">'
             f'<div class="n">{n}</div><div class="l">{l}</div></div>')
 
-def data_slide(title, n, unit, line, photo):
-    return page(f'<div class="col"><div class="box"><h2 class="t">{title}</h2>'
-                f'<div class="num"><span class="n">{n}</span><span class="u">{unit}</span></div>'
-                f'<p class="p">{line}</p></div><img class="photo" src="{img(photo)}"></div>')
+def bigtag(x, y, n, l, px, py):
+    """Large data card centred-left at (x,y), pinned to the facade at (px,py)."""
+    return (f'<svg style="position:absolute;left:0;top:0;z-index:5" width="1080" height="1350">'
+            f'<line x1="{x - 40 if x > 700 else x + 40}" y1="{y}" x2="{px}" y2="{py}" stroke="#fff" stroke-width="6" stroke-linecap="round"/></svg>'
+            f'<div class="pin" style="left:{px}px;top:{py}px"></div>'
+            f'<div class="tag" style="left:{x}px;top:{y}px;transform:translate({"-100%" if x > 700 else "0"},-50%);padding:26px 36px 30px;border-radius:34px">'
+            f'<div class="n" style="font-size:132px;letter-spacing:-.04em">{n}</div><div class="l" style="font-size:40px;margin-top:4px">{l}</div></div>')
+
+def data_slide(bg, title, line, n, unit, x, y, px, py, fade=600):
+    return page(f'<img class="bg" src="{img(bg)}"><div class="fade2"></div>'
+                f'<div class="box"><h2 class="t">{title}</h2><p class="p">{line}</p></div>'
+                + bigtag(x, y, n, unit, px, py))
 
 SLIDES = [
     page(f'<img class="bg" src="{img("cover.jpg")}"><div class="fade" style="height:540px;opacity:.92"></div>'
@@ -65,11 +74,15 @@ SLIDES = [
          + tag(80, 640, 'XX', 'сделок за год', 470, 700)
          + tag(1000, 820, 'XX тыс. ₸', 'за м² по сделкам', 560, 870)
          + tag(80, 990, '+XX%', 'цена за год', 420, 1010)),
-    data_slide('Сколько квартир продали за&nbsp;год?', 'XX', 'сделок', 'Чем больше сделок, тем точнее понятна цена квартир в&nbsp;этом ЖК', 'c2.jpg'),
-    data_slide('Сколько стоит метр по&nbsp;сделкам?', 'XX', 'тыс. ₸<br>за м²', 'Ориентир, с&nbsp;которым можно сравнить цену квартиры здесь', 'c3.jpg'),
-    data_slide('Как изменилась цена за&nbsp;год?', '+XX%', 'за год', 'Так меняется стоимость жилья в&nbsp;этом ЖК', 'c4.jpg'),
-    data_slide('Как часто здесь перепродают?', 'XX%', 'квартир<br>перепродавали', 'Частые перепродажи — повод узнать историю конкретной квартиры', 'c5.jpg'),
-    page(f'<img class="bg" src="{img("final.jpg")}"><div class="fade" style="height:620px"></div>'
+    data_slide('b2.jpg', 'Сколько квартир продали за&nbsp;год?', 'Чем больше сделок, тем точнее понятна цена квартир в&nbsp;этом ЖК',
+               'XX', 'сделок за год', 80, 930, 640, 760),
+    data_slide('b3.jpg', 'Сколько стоит метр по&nbsp;сделкам?', 'Ориентир, с&nbsp;которым можно сравнить цену квартиры здесь',
+               'XX тыс. ₸', 'за м² по сделкам', 80, 960, 700, 820),
+    data_slide('b4.jpg', 'Как изменилась цена за&nbsp;год?', 'Так меняется стоимость жилья в&nbsp;этом ЖК',
+               '+XX%', 'цена за год', 520, 960, 330, 800),
+    data_slide('b5.jpg', 'Как часто здесь перепродают?', 'Частые перепродажи — повод узнать историю конкретной квартиры',
+               'XX%', 'квартир<br>перепродавали', 1000, 1080, 880, 860),
+    page(f'<img class="bg" src="{img("b6.jpg")}"><div class="fade" style="height:560px;opacity:.85"></div>'
          f'<div class="box"><h2 class="big">Узнайте данные своего ЖК</h2>'
          f'<p class="p"><b>Введите адрес на <span style="color:{BLUE}">homecheck.kz</span></b></p></div>'),
 ]
