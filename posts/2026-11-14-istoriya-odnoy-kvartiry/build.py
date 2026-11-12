@@ -18,7 +18,7 @@ CSS = f"""
 .blue{{background:radial-gradient(80% 60% at 85% 10%,#4BA3FF 0%,rgba(75,163,255,0) 60%),linear-gradient(160deg,#2D8CFF 0%,#1768CE 55%,#0F55B3 100%);color:#fff}}
 .logo{{position:absolute;left:80px;top:64px;font-family:'Barlow Condensed';font-size:64px;font-weight:700;line-height:1}}
 .logo .h{{color:#12253E}} .logo .c{{color:#049BE1}}
-.blue .logo{{background:#fff;border-radius:999px;padding:12px 24px;left:70px}}
+.blue .logo .h,.blue .logo .c{{color:#fff}}
 .ex{{position:absolute;right:80px;top:76px;font-size:30px;font-weight:700;color:#2F4566;background:rgba(255,255,255,.75);border-radius:999px;padding:8px 22px}}
 .box{{position:absolute;left:80px;width:920px;display:flex;flex-direction:column;gap:26px}}
 .t{{margin:0;font-size:84px;line-height:1.06;font-weight:800;letter-spacing:-.025em}}
@@ -26,9 +26,9 @@ CSS = f"""
 .blue .p{{color:#fff}} .phone-in{{color:{NAVY}}}
 .p b{{font-weight:800;color:{NAVY}}}
 .dark{{background:radial-gradient(70% 50% at 85% 75%,rgba(45,140,255,.45) 0%,rgba(45,140,255,0) 70%),linear-gradient(170deg,#0F2E57 0%,#0B2545 60%,#081B33 100%);color:#fff}}
-.dark .logo{{background:#fff;border-radius:999px;padding:12px 24px;left:70px}}
+.dark .logo .h{{color:#fff}}
 .dark .p{{color:#CFE0F5}}
-.paper{{background-color:#F7FAFE;background-image:linear-gradient(#E6EEF8 2px,transparent 2px),linear-gradient(90deg,#E6EEF8 2px,transparent 2px);background-size:90px 90px;background-position:-20px -20px}}
+.paper{{background-color:#EAF2FC;background-image:linear-gradient(#D9E6F6 2px,transparent 2px),linear-gradient(90deg,#D9E6F6 2px,transparent 2px);background-size:90px 90px;background-position:-20px -20px}}
 .step{{position:absolute;left:80px;bottom:70px;display:flex;gap:12px}}
 .step i{{display:block;width:56px;height:10px;border-radius:5px;background:#D3E2F4}}
 .step i.on{{background:{BLUE}}}
@@ -131,7 +131,7 @@ SLIDES = [
     page('paper', text('Как менялись цены в&nbsp;доме?', '+27% за 6 лет. Жильё здесь дорожает — это важно, если решите продать') + chart_card('growth', 640) + steps(2), ex=True),
     page('paper', text('Когда её купили в&nbsp;последний раз?', '9 месяцев назад. Такая быстрая продажа — повод узнать причину до&nbsp;сделки') + chart_card('gap', 640) + steps(3), ex=True),
     page('paper', text('За сколько её купили?', 'За 42 млн ₸. Если сейчас просят больше, разберитесь за что, чтобы не переплатить') + chart_card('last', 640) + steps(4), ex=True),
-    page('blue', text('Узнайте историю квартиры до&nbsp;покупки', 'Введите адрес на <b style="color:#FFC94D">homecheck.kz</b>') +
+    page('dark', text('Узнайте историю квартиры до&nbsp;покупки', '<b style="color:#fff">Введите адрес на <span style="color:#FFC94D">homecheck.kz</span></b>') +
          phone(phone_search(), 305, 560, rot=0)),
 ]
 
