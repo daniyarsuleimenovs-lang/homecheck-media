@@ -59,11 +59,12 @@ HTML = (f'<!doctype html><html lang="ru"><head><meta charset="utf-8"><style>{CSS
         f'<div style="font-size:96px;line-height:1.08;font-weight:800;color:#0B2545;letter-spacing:-.025em">Как покупали квартиру <span style="color:#9A6B4C">тогда</span> и&nbsp;как <span style="color:#1768CE">сейчас</span></div></div>'
         + ''.join(scene(i, *s) for i, s in enumerate(SCENES))
         # final
-        + f'<div class="layer" id="fin" style="display:flex;flex-direction:column;justify-content:center;padding:0 80px 300px">'
-          f'<div style="font-size:84px;line-height:1.12;font-weight:800;color:#0B2545;letter-spacing:-.02em">'
-          f'<span style="color:#9A6B4C">Тогда</span> полагались на&nbsp;советы.<br><span style="color:#1768CE">Сейчас</span> — на&nbsp;данные.</div>'
-          f'<div class="logo" style="font-size:96px;margin-top:70px"><span class="h">Home</span><span class="c">Check.kz</span></div>'
-          f'<div style="font-size:44px;font-weight:700;color:#33465E;margin-top:18px">Проверьте квартиру до&nbsp;покупки</div></div>'
+        + f'<div class="layer" id="fin" style="display:flex;flex-direction:column;justify-content:center;padding:0 80px 300px;'
+          f'background:radial-gradient(70% 45% at 85% 20%,#5AB0FF 0%,rgba(90,176,255,0) 70%),linear-gradient(165deg,#2D8CFF 0%,#1768CE 60%,#1259B5 100%)">'
+          f'<div id="finW"><div id="finT" style="font-size:84px;line-height:1.12;font-weight:800;color:#FFFFFF;letter-spacing:-.02em">'
+          f'<span style="color:#F6D9B4">Тогда</span> полагались на&nbsp;советы.<br><span style="color:#FFC94D">Сейчас</span> — на&nbsp;данные.</div>'
+          f'<div class="logo" style="font-size:96px;margin-top:70px;color:#fff">HomeCheck.kz</div>'
+          f'<div style="font-size:44px;font-weight:700;color:#E6F0FC;margin-top:18px">Проверьте квартиру до&nbsp;покупки</div></div></div>'
         + '</div><script>'
         f'const HOOK={HOOK},SC={SC},FIN={FIN},DUR={DUR},N={len(SCENES)};'
         """
@@ -83,7 +84,8 @@ function setT(t){
     document.getElementById('SI'+i).style.transform=`scale(${1+0.06*cl((u-0.9)/SC)})`;
   }
   const f=t-FIN, fe=document.getElementById('fin');
-  fe.style.opacity = f>=0 ? cl(f/0.4) : 0; fe.style.transform=`translateY(${(1-ease(f/0.6))*40}px)`;
+  fe.style.opacity = cl((f+0.5)/0.5);
+  const w=document.getElementById('finW'); w.style.opacity=cl(f/0.35); w.style.transform=`translateY(${(1-ease(f/0.6))*40}px)`;
 }
 setT(0);
 </script></body></html>""")
