@@ -80,14 +80,14 @@ S3 = fact('aerial', '50% 55%', 'Как держит цену', '+XX%', 'за г�
           f'В среднем по Астане — +XX%. <span class="ph">[Дорожает быстрее города]</span>')
 S4 = fact('interior', '50% 60%', 'Что здесь покупают чаще всего', 'XX–XX', 'м²',
           f'В среднем за XX млн ₸. <span class="ph">[Самый ходовой формат в&nbsp;ЖК]</span>')
-S5 = fact('courtyard', '50% 88%', 'Как долго здесь живут', 'X', 'лет',
-          f'Столько в среднем владеют квартирой до&nbsp;продажи. <span class="ph">[Здесь живут подолгу]</span>')
+S5 = fact('courtyard', '50% 88%', 'Как долго владеют квартирой', 'X', 'лет',
+          f'В среднем до&nbsp;продажи. <span class="ph">[Квартиры здесь редко перепродают]</span>')
 
 rows = ''.join(
     f'<div style="display:flex;align-items:center;gap:28px;padding:30px 0;border-top:2px solid #EADCC8">'
     f'<span style="flex:none;width:68px;height:68px;border-radius:50%;background:{TERRA};color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700">{i}</span>'
     f'<span class="ph" style="font-size:40px;font-weight:700">{t}</span></div>'
-    for i, t in enumerate(['[Дорожает быстрее города]', '[Живут подолгу]', '[Чаще всего берут 60–80 м²]'], 1))
+    for i, t in enumerate(['[Дорожает быстрее города]', '[Квартиры редко перепродают]', '[Чаще всего берут 60–80 м²]'], 1))
 S6 = page(top('towers', '50% 90%', 620)
           + f'<div class="col" style="top:560px"><h2 class="t">Коротко о&nbsp;Хайвилле</h2><div style="margin-top:26px">{rows}</div></div>')
 
