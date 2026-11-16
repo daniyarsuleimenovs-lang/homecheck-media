@@ -1,6 +1,6 @@
 """Пост «Две похожие квартиры в соседних домах» (пн 23.11.2026). Рубрика «Люди и ситуации».
 Иллюстрации — ChatGPT (команда), героиня та же, что в Reels «Тогда и сейчас»; метка ИИ.
-Цифры — пример (пометка «Пример»). Фирменная палитра: А — жёлтый, Б — синий. Типографика: 76 / 120 / 40."""
+Цифры условные (дома без названий); пометку «Пример» команда убрала 16.11.2026. Фирменная палитра: А — жёлтый, Б — синий. Типографика: 76 / 120 / 40."""
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2] / 'templates'))
 from playwright.sync_api import sync_playwright
@@ -15,7 +15,7 @@ NUM = {'А': NAVY, 'Б': BLUE}
 FG = {'А': NAVY, 'Б': '#FFFFFF'}
 TINT = {'А': '#FFF3D1', 'Б': '#D6E7FB'}
 IMG = {n: data_uri(Image.open(HERE / 'src' / f'{n}.jpg')) for n in
-       ['houses', 'flat_a', 'flat_b', 'house_a', 'house_b', 'surprised', 'window']}
+       ['houses', 'flat_a', 'flat_b', 'house_a', 'house_b', 'cafe', 'balcony']}
 
 CSS = f"""
 @font-face{{font-family:'Barlow Condensed';font-weight:700;src:url('{FONT_LOGO_URI}')}}
@@ -38,7 +38,7 @@ CSS = f"""
 def page(inner, ex=False):
     return (f'<!doctype html><html lang="ru"><head><meta charset="utf-8"><style>{CSS}</style></head><body><div class="s">'
             f'<span class="logo"><span class="h">Home</span><span class="c">Check.kz</span></span>'
-            f'{"<span class=ex>Пример</span>" if ex else ""}{inner}</div></body></html>')
+            f'{inner}</div></body></html>')
 
 
 def badge(k, size=84, fs=48):
@@ -85,8 +85,8 @@ def versus(section, title, a, b, line, thumbs=('house_a', 'house_b')):
                 f'<div style="padding:24px 30px 0"><div style="display:flex;align-items:center;gap:14px;margin-bottom:14px">{badge(k, 56, 32)}<span class="p b">{"Дом" if th.startswith("house") else "Квартира"} {k}</span></div>'
                 f'<div class="n" style="color:{NUM[k]}">{n}</div>'
                 f'<p class="p b" style="margin-top:12px">{u}</p></div></div>')
-    return page(f'<div class="col" style="top:160px"><p class="lab" style="color:#1768CE">{section}</p><h2 class="t">{title}</h2></div>'
-                f'<div class="col" style="top:420px;display:flex;justify-content:space-between;align-items:stretch">{side("А", a, thumbs[0])}{side("Б", b, thumbs[1])}</div>'
+    return page(f'<div class="col" style="top:170px"><h2 class="t">{title}</h2></div>'
+                f'<div class="col" style="top:400px;display:flex;justify-content:space-between;align-items:stretch">{side("А", a, thumbs[0])}{side("Б", b, thumbs[1])}</div>'
                 f'<p class="p col" style="top:1080px">{line}</p>', ex=True)
 
 
@@ -100,7 +100,7 @@ S7 = versus('Теперь — квартиры', 'История самих кв
             '', thumbs=('flat_a', 'flat_b'))
 
 # 8 — что получается
-S8 = page(f'<img src="{IMG["surprised"]}" style="position:absolute;left:0;top:0;width:1080px;height:640px;object-fit:cover;object-position:50% 35%">'
+S8 = page(f'<img src="{IMG["cafe"]}" style="position:absolute;left:0;top:0;width:1080px;height:640px;object-fit:cover;object-position:50% 0%">'
           f'<div style="position:absolute;left:0;top:0;width:1080px;height:200px;z-index:2;background:linear-gradient(180deg,rgba(242,248,255,.9),rgba(242,248,255,0))"></div>'
           f'<div style="position:absolute;left:0;top:420px;width:1080px;height:230px;z-index:2;background:linear-gradient(180deg,rgba(230,241,253,0),#E6F1FD)"></div>'
           f'<div class="col" style="top:600px"><h2 class="t">Что получается</h2>'
@@ -110,12 +110,12 @@ S8 = page(f'<img src="{IMG["surprised"]}" style="position:absolute;left:0;top:0;
           f'<p class="p" style="flex:1">Дороже сделок в&nbsp;доме, цены почти не&nbsp;растут, квартиру недавно перепродали. <b class=b>Есть о&nbsp;чём спросить продавца</b></p></div></div>')
 
 # 9 — финал: картинка на весь слайд, текст в небе
-S9 = page(f'<img src="{IMG["window"]}" style="position:absolute;inset:0;width:1080px;height:1350px;object-fit:cover;object-position:40% 50%">'
+S9 = page(f'<img src="{IMG["balcony"]}" style="position:absolute;inset:0;width:1080px;height:1350px;object-fit:cover;object-position:50% 50%">'
           f'<div style="position:absolute;left:0;top:0;width:1080px;height:640px;z-index:2;background:linear-gradient(180deg,rgba(242,248,255,.95) 0%,rgba(242,248,255,.85) 60%,rgba(242,248,255,0) 100%)"></div>'
           f'<div class="col" style="top:170px"><h2 class="t">Выбирайте квартиру не&nbsp;только глазами</h2>'
           f'<p class="p b" style="margin-top:22px">Сравните дом и&nbsp;квартиру по&nbsp;данным на&nbsp;<span style="color:{BLUE}">homecheck.kz</span></p></div>')
 
-SLIDES = [S1, S2, S3, S4, S5, S6, S7, S8, S9]
+SLIDES = [S1, S2, S3, S4, S5, S7, S8, S9]
 
 if __name__ == '__main__':
     with sync_playwright() as p:
