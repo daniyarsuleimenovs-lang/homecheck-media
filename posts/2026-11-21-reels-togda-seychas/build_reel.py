@@ -15,13 +15,13 @@ img = lambda n: data_uri(Image.open(HERE / 'src' / f'{n}.jpg'))
 
 SCENES = [
     ('t1', '22%', 'Узнавали у&nbsp;соседки, за&nbsp;сколько ушла квартира на&nbsp;третьем',
-     's1', '18%', 'Смотрим реальные цены сделок в&nbsp;доме'),
+     's1', '10%', 'Смотрим реальные цены сделок в&nbsp;доме'),
     ('t2', '20%', '«Хозяин был один, всё хорошо» — со&nbsp;слов продавца',
-     's2', '45%', 'Видим, сколько раз квартиру продавали'),
+     's2', '40%', 'Видим, сколько раз квартиру продавали'),
     ('t3', '25%', '«Нормальная цена» — сказал дядя, который покупал в&nbsp;2005-м',
-     's3', '28%', 'Видим, как менялись цены в&nbsp;доме'),
+     's3', '15%', 'Видим, как менялись цены в&nbsp;доме'),
     ('t4', '18%', 'Чисто в&nbsp;подъезде — значит, дом хороший',
-     's4', '35%', 'Знаем, как часто здесь перепродают квартиры и&nbsp;что пишут жильцы'),
+     's4', '20%', 'Знаем, как часто здесь перепродают квартиры и&nbsp;что пишут жильцы'),
 ]
 
 CSS = f"""
@@ -61,7 +61,7 @@ HTML = (f'<!doctype html><html lang="ru"><head><meta charset="utf-8"><style>{CSS
         # final
         + f'<div class="layer" id="fin" style="display:flex;flex-direction:column;justify-content:center;padding:0 80px 300px">'
           f'<div style="font-size:84px;line-height:1.12;font-weight:800;color:#0B2545;letter-spacing:-.02em">'
-          f'<span style="color:#9A6B4C">Тогда</span> покупали на&nbsp;слово.<br><span style="color:#1768CE">Сейчас</span> — по&nbsp;данным.</div>'
+          f'<span style="color:#9A6B4C">Тогда</span> полагались на&nbsp;советы.<br><span style="color:#1768CE">Сейчас</span> — на&nbsp;данные.</div>'
           f'<div class="logo" style="font-size:96px;margin-top:70px"><span class="h">Home</span><span class="c">Check.kz</span></div>'
           f'<div style="font-size:44px;font-weight:700;color:#33465E;margin-top:18px">Проверьте квартиру до&nbsp;покупки</div></div>'
         + '</div><script>'
