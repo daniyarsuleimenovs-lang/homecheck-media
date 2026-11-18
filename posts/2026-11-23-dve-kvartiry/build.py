@@ -54,16 +54,18 @@ S1 = page(f'<img src="{IMG["houses"]}" style="position:absolute;inset:0;width:10
 
 # 2 — две квартиры рядом
 def flat(k, img, rows):
-    r = ''.join(f'<p class="p" style="padding:14px 0;border-top:2px solid rgba(11,37,69,.08)">{x}</p>' for x in rows)
+    r = ''.join(f'<p class="p" style="padding:10px 0;border-top:2px solid rgba(11,37,69,.08)">{x}</p>' for x in rows)
     return (f'<div style="width:440px"><div style="display:flex;align-items:center;gap:18px;margin-bottom:18px">{badge(k, 64, 36)}<span class="p b">Квартира {k}</span></div>'
-            f'<div class="card" style="height:400px"><img src="{IMG[img]}" style="width:100%;height:100%;object-fit:cover"></div><div style="margin-top:14px">{r}</div></div>')
+            f'<div class="card" style="height:360px"><img src="{IMG[img]}" style="width:100%;height:100%;object-fit:cover"></div><div style="margin-top:10px">{r}</div></div>')
 
 S2 = page(f'<div class="col" style="top:170px"><h2 class="t">Обе — за&nbsp;40&nbsp;млн&nbsp;₸</h2>'
           f'<p class="p" style="margin-top:14px">64&nbsp;м², 2&nbsp;комнаты</p></div>'
           f'<div class="col" style="top:430px;display:flex;justify-content:space-between">'
           + flat('А', 'flat_a', ['<b class=b>5</b> этаж', 'Вид <b class=b>во двор</b>', 'Ремонт <b class=b>5&nbsp;лет назад</b>'])
           + flat('Б', 'flat_b', ['<b class=b>11</b> этаж', 'Вид <b class=b>на парк</b>', '<b class=b>Свежий</b> ремонт'])
-          + '</div>', ex=True)
+          + '</div>'
+          + f'<div class="col" style="top:1150px"><p class="p b">Ваш выбор — <span style="color:#C98F00">А</span> или <span style="color:{BLUE}">Б</span>? Напишите в&nbsp;комментариях.</p>'
+            f'<p class="p" style="margin-top:6px">Дальше — что говорят сделки →</p></div>', ex=True)
 
 # 3 — ваш выбор
 S3 = page(f'<div class="col" style="top:170px;display:flex;justify-content:space-between">'
@@ -115,7 +117,7 @@ S9 = page(f'<img src="{IMG["balcony"]}" style="position:absolute;inset:0;width:1
           f'<div class="col" style="top:170px"><h2 class="t">Выбирайте квартиру не&nbsp;только глазами</h2>'
           f'<p class="p b" style="margin-top:22px">Сравните дом и&nbsp;квартиру по&nbsp;данным на&nbsp;<span style="color:{BLUE}">homecheck.kz</span></p></div>')
 
-SLIDES = [S1, S2, S3, S4, S5, S7, S8, S9]
+SLIDES = [S1, S2, S4, S5, S7, S8, S9]
 
 if __name__ == '__main__':
     with sync_playwright() as p:
