@@ -47,25 +47,22 @@ def badge(k, size=84, fs=48):
 
 # 1 — обложка: картинка на весь слайд, текст в небе, метки А и Б на домах
 S1 = page(f'<img src="{IMG["houses"]}" style="position:absolute;inset:0;width:1080px;height:1350px;object-fit:cover">'
-          f'<div class="col" style="top:170px"><h1 class="t">Две похожие квартиры. Какую выберете?</h1>'
-          f'<p class="p b" style="margin-top:22px">Листайте →</p></div>'
+          f'<div class="col" style="top:170px"><h1 class="t">Две похожие квартиры. Какую выберете?</h1></div>'
           f'<div style="position:absolute;left:150px;top:520px;z-index:4">{badge("А", 100, 56)}</div>'
           f'<div style="position:absolute;left:840px;top:520px;z-index:4">{badge("Б", 100, 56)}</div>')
 
-# 2 — две квартиры рядом
-def flat(k, img, rows):
-    r = ''.join(f'<p class="p" style="padding:10px 0;border-top:2px solid rgba(11,37,69,.08)">{x}</p>' for x in rows)
-    return (f'<div style="width:440px"><div style="display:flex;align-items:center;gap:18px;margin-bottom:18px">{badge(k, 64, 36)}<span class="p b">Квартира {k}</span></div>'
-            f'<div class="card" style="height:360px"><img src="{IMG[img]}" style="width:100%;height:100%;object-fit:cover"></div><div style="margin-top:10px">{r}</div></div>')
+# 2 — две квартиры рядом: минимум текста, один стиль
+def flat(k, img, text):
+    return (f'<div style="width:440px"><div style="margin-bottom:20px">{badge(k, 72, 40)}</div>'
+            f'<div class="card" style="height:440px"><img src="{IMG[img]}" style="width:100%;height:100%;object-fit:cover"></div>'
+            f'<p class="p" style="margin-top:22px">{text}</p></div>')
 
-S2 = page(f'<div class="col" style="top:170px"><h2 class="t">Обе — за&nbsp;40&nbsp;млн&nbsp;₸</h2>'
-          f'<p class="p" style="margin-top:14px">64&nbsp;м², 2&nbsp;комнаты</p></div>'
-          f'<div class="col" style="top:430px;display:flex;justify-content:space-between">'
-          + flat('А', 'flat_a', ['<b class=b>5</b> этаж', 'Вид <b class=b>во двор</b>', 'Ремонт <b class=b>5&nbsp;лет назад</b>'])
-          + flat('Б', 'flat_b', ['<b class=b>11</b> этаж', 'Вид <b class=b>на парк</b>', '<b class=b>Свежий</b> ремонт'])
+S2 = page(f'<div class="col" style="top:170px"><h2 class="t">Обе — 64&nbsp;м² за&nbsp;40&nbsp;млн&nbsp;₸</h2></div>'
+          f'<div class="col" style="top:380px;display:flex;justify-content:space-between">'
+          + flat('А', 'flat_a', '5 этаж, двор<br>Ремонт 5&nbsp;лет назад')
+          + flat('Б', 'flat_b', '11 этаж, парк<br>Свежий ремонт')
           + '</div>'
-          + f'<div class="col" style="top:1150px"><p class="p b">Ваш выбор — <span style="color:#C98F00">А</span> или <span style="color:{BLUE}">Б</span>? Напишите в&nbsp;комментариях.</p>'
-            f'<p class="p" style="margin-top:6px">Дальше — что говорят сделки →</p></div>', ex=True)
+          + f'<div class="col" style="top:1130px"><h2 class="t" style="font-size:64px">Ваш выбор — А или Б?</h2></div>')
 
 # 3 — ваш выбор
 S3 = page(f'<div class="col" style="top:170px;display:flex;justify-content:space-between">'
