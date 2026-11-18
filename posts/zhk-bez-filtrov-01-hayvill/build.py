@@ -21,7 +21,7 @@ CSS = f"""
 .logo .h{{color:#12253E}} .logo .c{{color:#049BE1}}
 .img{{position:absolute;left:0;top:0;width:1080px;object-fit:cover}}
 .col{{position:absolute;left:80px;width:920px;z-index:4}}
-.t{{margin:0;font-size:76px;line-height:1.08;font-weight:800;letter-spacing:-.025em}}
+.t{{margin:0;font-size:88px;line-height:1.06;font-weight:800;letter-spacing:-.03em}}
 .n{{font-size:140px;line-height:.95;font-weight:800;letter-spacing:-.04em;color:{BLUE}}}
 .p,.u{{font-size:40px;line-height:1.3;font-weight:500;color:#33465E;margin:0}}
 .u{{font-weight:700;color:{NAVY}}}
@@ -70,26 +70,26 @@ def fact(img, pos, title, num, unit, line):
 
 
 S1 = page(full('aerial', '50% 0%', 520)
-          + f'<div class="col" style="top:170px"><h1 class="t" style="font-size:140px;line-height:1;letter-spacing:-.04em">{NAME}</h1>'
+          + f'<div class="col" style="top:170px"><h1 class="t" style="font-size:190px;line-height:.95;letter-spacing:-.045em">{NAME}</h1>'
             f'<p class="p" style="margin-top:18px;color:{NAVY};font-weight:700">Что о нём говорят реальные сделки →</p></div>'
           + tag(560, 1020, '≈650 тыс. ₸', 'за м² по сделкам', 470, 880))
 
 S2 = fact('towers', '50% 12%', 'Сколько стоит метр на&nbsp;самом деле', '≈650', 'тыс. ₸ за м²',
-          'Типичная цена метра по&nbsp;зарегистрированным сделкам в&nbsp;ЖК')
+          'Столько обычно платят за&nbsp;метр в&nbsp;реальных сделках. Ориентир, чтобы понять, не&nbsp;завышена ли цена квартиры')
 S3 = fact('aerial', '50% 55%', 'Как меняются цены', '+9%', 'за год',
-          'Настолько выросла типичная цена метра по&nbsp;сравнению с&nbsp;предыдущим годом')
+          'Цены в&nbsp;ЖК растут. Это общий тренд по&nbsp;ЖК, а&nbsp;не&nbsp;рост каждой отдельной квартиры')
 S4 = fact('interior', '50% 60%', 'Что здесь покупают чаще всего', '60–80', 'м²',
-          'Каждая пятая продажа. Типичная сумма сделки — 40,5&nbsp;млн&nbsp;₸')
-S5 = fact('courtyard', '50% 88%', 'Как долго владеют квартирой', '≈5', 'лет',
-          'Типичный срок между покупкой и&nbsp;перепродажей')
+          'Каждая пятая продажа. Обычно такая квартира стоит около 40,5&nbsp;млн&nbsp;₸')
+S5 = fact('courtyard', '50% 88%', 'Сколько владеют до&nbsp;перепродажи', '≈5', 'лет',
+          'Обычно квартиру перепродают примерно через 5&nbsp;лет. Если продают раньше — стоит спросить почему')
 
 rows = ''.join(
     f'<div style="display:flex;align-items:center;gap:28px;padding:24px 0;border-top:2px solid #EADCC8">'
     f'<span style="flex:none;width:68px;height:68px;border-radius:50%;background:{TERRA};color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700">{i}</span>'
     f'<span style="font-size:40px;font-weight:700;color:{NAVY}">{t}</span></div>'
-    for i, t in enumerate(['≈650 тыс. ₸ за м² по&nbsp;сделкам', '+9% к&nbsp;цене метра за&nbsp;год', 'Чаще всего покупают 60–80&nbsp;м²', '≈5 лет владеют до&nbsp;перепродажи'], 1))
+    for i, t in enumerate(['Ориентир — около 650&nbsp;тыс.&nbsp;₸ за&nbsp;м²', '60–80&nbsp;м² — обычно около 40,5&nbsp;млн&nbsp;₸', 'Цены в&nbsp;ЖК растут: +9% за&nbsp;год', 'Продают раньше 5&nbsp;лет? Узнайте почему'], 1))
 S6 = page(top('towers', '50% 90%', 620)
-          + f'<div class="col" style="top:560px"><h2 class="t">Коротко о&nbsp;Хайвиле</h2><div style="margin-top:26px">{rows}</div></div>')
+          + f'<div class="col" style="top:560px"><h2 class="t">Что это значит для&nbsp;покупателя</h2><div style="margin-top:26px">{rows}</div></div>')
 
 S7 = page(full('courtyard', '50% 100%', 560)
           + f'<div class="col" style="top:170px"><h2 class="t">А что сделки говорят о&nbsp;вашем ЖК?</h2>'
