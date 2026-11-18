@@ -87,12 +87,12 @@ rows = ''.join(
     f'<div style="display:flex;align-items:center;gap:28px;padding:20px 0;border-top:2px solid #EADCC8">'
     f'<span style="flex:none;width:68px;height:68px;border-radius:50%;background:{TERRA};color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700">{i}</span>'
     f'<span style="font-size:42px;line-height:1.25;font-weight:600;color:{NAVY}">{t}</span></div>'
-    for i, t in enumerate(['Просят больше 650&nbsp;тыс.&nbsp;₸ за&nbsp;м²? Уточните, за&nbsp;что доплата: ремонт, этаж, вид',
-                           'Ищете 60–80&nbsp;м²? Таких сделок больше всего — легко сравнить цену',
-                           'Цены растут, но это по&nbsp;ЖК в&nbsp;целом. Смотрите цену конкретной квартиры',
-                           'Продают раньше 5&nbsp;лет после покупки? Узнайте причину'], 1))
-S6 = page(top('towers', '50% 90%', 470)
-          + f'<div class="col" style="top:400px"><h2 class="t">Что это значит для&nbsp;покупателя</h2><div style="margin-top:26px">{rows}</div></div>')
+    for i, t in enumerate(['Дороже 650&nbsp;тыс.&nbsp;₸ за&nbsp;м²? Узнайте, за&nbsp;что',
+                           '60–80&nbsp;м² — проще всего сравнить цену',
+                           'Цены растут — проверяйте конкретную квартиру',
+                           'Продают раньше 5&nbsp;лет? Спросите почему'], 1))
+S6 = page(top('towers', '50% 90%', 560)
+          + f'<div class="col" style="top:500px"><h2 class="t">Что это значит для&nbsp;покупателя</h2><div style="margin-top:26px">{rows}</div></div>')
 
 S7 = page(full('courtyard', '50% 100%', 560)
           + f'<div class="col" style="top:170px"><h2 class="t">А что сделки говорят о&nbsp;вашем ЖК?</h2>'
