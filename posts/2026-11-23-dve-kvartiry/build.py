@@ -47,8 +47,8 @@ def badge(k, size=84, fs=48):
 
 # 1 — обложка: картинка на весь слайд, текст в небе, метки А и Б на домах
 S1 = page(f'<img src="{IMG["houses"]}" style="position:absolute;inset:0;width:1080px;height:1350px;object-fit:cover">'
-          f'<div class="col" style="top:170px"><h1 class="t">Две похожие квартиры в&nbsp;соседних домах</h1>'
-          f'<p class="p b" style="margin-top:22px">Какую выберете вы? Листайте →</p></div>'
+          f'<div class="col" style="top:170px"><h1 class="t">Две похожие квартиры. Какую выберете?</h1>'
+          f'<p class="p b" style="margin-top:22px">Листайте →</p></div>'
           f'<div style="position:absolute;left:150px;top:520px;z-index:4">{badge("А", 100, 56)}</div>'
           f'<div style="position:absolute;left:840px;top:520px;z-index:4">{badge("Б", 100, 56)}</div>')
 
@@ -58,11 +58,11 @@ def flat(k, img, rows):
     return (f'<div style="width:440px"><div style="display:flex;align-items:center;gap:18px;margin-bottom:18px">{badge(k, 64, 36)}<span class="p b">Квартира {k}</span></div>'
             f'<div class="card" style="height:400px"><img src="{IMG[img]}" style="width:100%;height:100%;object-fit:cover"></div><div style="margin-top:14px">{r}</div></div>')
 
-S2 = page(f'<div class="col" style="top:170px"><h2 class="t">Цена одинаковая — 40&nbsp;млн&nbsp;₸</h2>'
-          f'<p class="p" style="margin-top:14px">Обе: 64&nbsp;м², 2&nbsp;комнаты</p></div>'
+S2 = page(f'<div class="col" style="top:170px"><h2 class="t">Обе — за&nbsp;40&nbsp;млн&nbsp;₸</h2>'
+          f'<p class="p" style="margin-top:14px">64&nbsp;м², 2&nbsp;комнаты</p></div>'
           f'<div class="col" style="top:430px;display:flex;justify-content:space-between">'
-          + flat('А', 'flat_a', ['<b class=b>5-й</b> этаж', 'Вид <b class=b>во двор</b>', 'Ремонт <b class=b>5&nbsp;лет назад</b>'])
-          + flat('Б', 'flat_b', ['<b class=b>11-й</b> этаж', 'Вид <b class=b>на парк</b>', 'Ремонт <b class=b>свежий</b>'])
+          + flat('А', 'flat_a', ['<b class=b>5</b> этаж', 'Вид <b class=b>во двор</b>', 'Ремонт <b class=b>5&nbsp;лет назад</b>'])
+          + flat('Б', 'flat_b', ['<b class=b>11</b> этаж', 'Вид <b class=b>на парк</b>', '<b class=b>Свежий</b> ремонт'])
           + '</div>', ex=True)
 
 # 3 — ваш выбор
@@ -72,8 +72,8 @@ S3 = page(f'<div class="col" style="top:170px;display:flex;justify-content:space
                     for k, i in [('А', 'flat_a'), ('Б', 'flat_b')])
           + '</div>'
           f'<div class="col" style="top:820px"><h2 class="t">Ваш выбор?</h2>'
-          f'<p class="p" style="margin-top:22px">Напишите в&nbsp;комментариях: <b style="color:#C98F00">А</b> или <b style="color:{BLUE}">Б</b>.</p>'
-          f'<p class="p b" style="margin-top:14px">А теперь посмотрим, что скажут данные →</p></div>')
+          f'<p class="p" style="margin-top:22px">Напишите в&nbsp;комментариях: <b style="color:#C98F00">А</b> или <b style="color:{BLUE}">Б</b></p>'
+          f'<p class="p b" style="margin-top:14px">Теперь посмотрим на&nbsp;сделки →</p></div>')
 
 
 # 4–7 — сравнения
@@ -90,14 +90,14 @@ def versus(section, title, a, b, line, thumbs=('house_a', 'house_b')):
                 f'<p class="p col" style="top:1080px">{line}</p>', ex=True)
 
 
-S4 = versus('Сначала — дома', 'Сколько стоит метр по&nbsp;сделкам', ('590', 'тыс. ₸ за м²'), ('520', 'тыс. ₸ за м²'),
-            'При одинаковой цене квартира&nbsp;Б заметно дороже, чем обычно продают в&nbsp;её доме')
-S5 = versus('Сначала — дома', 'Как меняются цены в&nbsp;доме', ('+9%', 'за год'), ('+2%', 'за год'),
-            'Дом А дорожает, Б почти стоит на&nbsp;месте. Это важно, если когда-нибудь решите продать')
+S4 = versus('', 'Цена метра в&nbsp;доме', ('590', 'тыс. ₸ за м²'), ('520', 'тыс. ₸ за м²'),
+            'За&nbsp;Б просят больше, чем обычно платят в&nbsp;её доме')
+S5 = versus('', 'Как растут цены', ('+9%', 'за год'), ('+2%', 'за год'),
+            'Дом А дорожает, Б — почти нет')
 S6 = versus('Сначала — дома', 'Как часто здесь перепродают', ('1 из 20', 'квартир за год'), ('1 из 7', 'квартир за год'),
             'Если в&nbsp;доме часто продают, стоит узнать почему')
-S7 = versus('Теперь — квартиры', 'История самих квартир', ('7 лет', 'одни владельцы'), ('2 раза', 'продавали за&nbsp;3&nbsp;года'),
-            '', thumbs=('flat_a', 'flat_b'))
+S7 = versus('', 'Как часто продавали квартиру', ('7 лет', 'один владелец'), ('2', 'продажи за&nbsp;3&nbsp;года'),
+            'Б часто меняет хозяев', thumbs=('flat_a', 'flat_b'))
 
 # 8 — что получается
 S8 = page(f'<img src="{IMG["cafe"]}" style="position:absolute;left:0;top:0;width:1080px;height:640px;object-fit:cover;object-position:50% 0%">'
@@ -105,9 +105,9 @@ S8 = page(f'<img src="{IMG["cafe"]}" style="position:absolute;left:0;top:0;width
           f'<div style="position:absolute;left:0;top:420px;width:1080px;height:230px;z-index:2;background:linear-gradient(180deg,rgba(230,241,253,0),#E6F1FD)"></div>'
           f'<div class="col" style="top:600px"><h2 class="t">Что получается</h2>'
           f'<div style="display:flex;gap:26px;margin-top:34px;align-items:flex-start">{badge("А", 72, 40)}'
-          f'<p class="p" style="flex:1">Цена близка к&nbsp;сделкам в&nbsp;доме, дом дорожает, история понятная</p></div>'
+          f'<p class="p" style="flex:1">Цена в&nbsp;рынке, понятная история</p></div>'
           f'<div style="display:flex;gap:26px;margin-top:30px;align-items:flex-start">{badge("Б", 72, 40)}'
-          f'<p class="p" style="flex:1">Дороже сделок в&nbsp;доме, цены почти не&nbsp;растут, квартиру недавно перепродали. <b class=b>Есть о&nbsp;чём спросить продавца</b></p></div></div>')
+          f'<p class="p" style="flex:1">Дороже рынка — <b class=b>есть вопросы к&nbsp;продавцу</b></p></div></div>')
 
 # 9 — финал: картинка на весь слайд, текст в небе
 S9 = page(f'<img src="{IMG["balcony"]}" style="position:absolute;inset:0;width:1080px;height:1350px;object-fit:cover;object-position:50% 50%">'
