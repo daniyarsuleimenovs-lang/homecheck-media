@@ -86,8 +86,8 @@ S5 = fact('courtyard', '50% 88%', 'Сколько владеют до&nbsp;пе�
 rows = ''.join(
     f'<div style="display:flex;align-items:center;gap:28px;padding:20px 0;border-top:2px solid #EADCC8">'
     f'<span style="flex:none;width:68px;height:68px;border-radius:50%;background:{TERRA};color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700">{i}</span>'
-    f'<span style="font-size:42px;line-height:1.25;font-weight:600;color:{NAVY}">{t}</span></div>'
-    for i, t in enumerate(['Дороже 650&nbsp;тыс.&nbsp;₸ за&nbsp;м²? Узнайте, за&nbsp;что',
+    f'<span style="font-size:42px;line-height:1.25;font-weight:600;color:{NAVY};text-wrap:balance">{t}</span></div>'
+    for i, t in enumerate(['Дороже 650&nbsp;тыс.&nbsp;₸ за&nbsp;м²? Узнайте за&nbsp;что',
                            '60–80&nbsp;м² — проще всего сравнить цену',
                            'Цены растут — проверяйте конкретную квартиру',
                            'Продают раньше 5&nbsp;лет? Спросите почему'], 1))
