@@ -21,9 +21,9 @@ CSS = f"""
 .logo .h{{color:#12253E}} .logo .c{{color:#049BE1}}
 .img{{position:absolute;left:0;top:0;width:1080px;object-fit:cover}}
 .col{{position:absolute;left:80px;width:920px;z-index:4}}
-.t{{margin:0;font-size:88px;line-height:1.06;font-weight:800;letter-spacing:-.03em}}
+.t{{margin:0;font-size:76px;line-height:1.08;font-weight:800;letter-spacing:-.025em}}
 .n{{font-size:140px;line-height:.95;font-weight:800;letter-spacing:-.04em;color:{BLUE}}}
-.p,.u{{font-size:40px;line-height:1.3;font-weight:500;color:#33465E;margin:0}}
+.p,.u{{font-size:46px;line-height:1.28;font-weight:500;color:#33465E;margin:0}}
 .u{{font-weight:700;color:{NAVY}}}
 .ph{{color:{TERRA}}}
 .tag{{position:absolute;z-index:6;background:#fff;border-radius:28px;padding:22px 30px 24px;box-shadow:0 20px 50px rgba(11,37,69,.25)}}
@@ -58,8 +58,8 @@ def tag(x, y, n, l, px, py):
             f'<line x1="{x + 40}" y1="{y}" x2="{px}" y2="{py}" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg>'
             f'<div class="pin" style="left:{px}px;top:{py}px"></div>'
             f'<div class="tag" style="left:{x}px;top:{y}px;transform:translateY(-50%)">'
-            f'<div style="font-size:56px;font-weight:800;color:{BLUE};line-height:1">{n}</div>'
-            f'<div style="font-size:30px;font-weight:600;color:#33465E;margin-top:8px">{l}</div></div>')
+            f'<div style="font-size:64px;font-weight:800;color:{BLUE};line-height:1">{n}</div>'
+            f'<div style="font-size:36px;font-weight:600;color:#33465E;margin-top:8px">{l}</div></div>')
 
 
 def fact(img, pos, title, num, unit, line):
@@ -70,8 +70,8 @@ def fact(img, pos, title, num, unit, line):
 
 
 S1 = page(full('aerial', '50% 0%', 520)
-          + f'<div class="col" style="top:170px"><h1 class="t" style="font-size:190px;line-height:.95;letter-spacing:-.045em">{NAME}</h1>'
-            f'<p class="p" style="margin-top:18px;color:{NAVY};font-weight:700">Что о нём говорят реальные сделки →</p></div>'
+          + f'<div class="col" style="top:170px"><h1 class="t" style="font-size:150px;line-height:1;letter-spacing:-.04em">{NAME}</h1>'
+            f'<p class="p" style="margin-top:20px;color:{NAVY};font-weight:700;font-size:54px;line-height:1.2">Что о&nbsp;нём говорят реальные сделки →</p></div>'
           + tag(560, 1020, '≈650 тыс. ₸', 'за м² по сделкам', 470, 880))
 
 S2 = fact('towers', '50% 12%', 'Сколько стоит метр на&nbsp;самом деле', '≈650', 'тыс. ₸ за м²',
@@ -84,12 +84,15 @@ S5 = fact('courtyard', '50% 88%', 'Сколько владеют до&nbsp;пе�
           'Обычно квартиру перепродают примерно через 5&nbsp;лет. Если продают раньше — стоит спросить почему')
 
 rows = ''.join(
-    f'<div style="display:flex;align-items:center;gap:28px;padding:24px 0;border-top:2px solid #EADCC8">'
+    f'<div style="display:flex;align-items:center;gap:28px;padding:20px 0;border-top:2px solid #EADCC8">'
     f'<span style="flex:none;width:68px;height:68px;border-radius:50%;background:{TERRA};color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700">{i}</span>'
-    f'<span style="font-size:40px;font-weight:700;color:{NAVY}">{t}</span></div>'
-    for i, t in enumerate(['Ориентир — около 650&nbsp;тыс.&nbsp;₸ за&nbsp;м²', '60–80&nbsp;м² — обычно около 40,5&nbsp;млн&nbsp;₸', 'Цены в&nbsp;ЖК растут: +9% за&nbsp;год', 'Продают раньше 5&nbsp;лет? Узнайте почему'], 1))
-S6 = page(top('towers', '50% 90%', 620)
-          + f'<div class="col" style="top:560px"><h2 class="t">Что это значит для&nbsp;покупателя</h2><div style="margin-top:26px">{rows}</div></div>')
+    f'<span style="font-size:42px;line-height:1.25;font-weight:600;color:{NAVY}">{t}</span></div>'
+    for i, t in enumerate(['Просят больше 650&nbsp;тыс.&nbsp;₸ за&nbsp;м²? Уточните, за&nbsp;что доплата: ремонт, этаж, вид',
+                           'Ищете 60–80&nbsp;м²? Таких сделок больше всего — легко сравнить цену',
+                           'Цены растут, но это по&nbsp;ЖК в&nbsp;целом. Смотрите цену конкретной квартиры',
+                           'Продают раньше 5&nbsp;лет после покупки? Узнайте причину'], 1))
+S6 = page(top('towers', '50% 90%', 470)
+          + f'<div class="col" style="top:400px"><h2 class="t">Что это значит для&nbsp;покупателя</h2><div style="margin-top:26px">{rows}</div></div>')
 
 S7 = page(full('courtyard', '50% 100%', 560)
           + f'<div class="col" style="top:170px"><h2 class="t">А что сделки говорят о&nbsp;вашем ЖК?</h2>'
