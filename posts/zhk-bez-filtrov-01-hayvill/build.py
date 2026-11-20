@@ -10,7 +10,7 @@ from PIL import Image
 
 HERE = pathlib.Path(__file__).resolve().parent
 NAVY, BLUE, TERRA, CREAM, SKY = '#0B2545', '#1768CE', '#B8613F', '#FBF2E6', '#DCEAF6'
-NAME = 'Highvill'
+NAME = 'ЖК Highvill'
 IMG = {n: data_uri(Image.open(HERE / 'src' / f'{n}.jpg')) for n in ['interior', 'towers', 'aerial', 'courtyard']}
 
 CSS = f"""
@@ -77,7 +77,7 @@ S1 = page(full('aerial', '50% 0%', 520)
 S2 = fact('towers', '50% 12%', 'Сколько стоит метр на&nbsp;самом деле', '≈650', 'тыс. ₸ за м²',
           'Столько обычно платят за&nbsp;метр в&nbsp;реальных сделках. Ориентир, чтобы понять, не&nbsp;завышена ли цена квартиры')
 S3 = fact('aerial', '50% 55%', 'Как меняются цены', '+9%', 'за год',
-          'Цены в&nbsp;ЖК растут. Это общий тренд по&nbsp;ЖК, а&nbsp;не&nbsp;рост каждой отдельной квартиры')
+          'Цены в&nbsp;ЖК Highvill растут. Это общий тренд по&nbsp;ЖК, а&nbsp;не&nbsp;рост каждой отдельной квартиры')
 S4 = fact('interior', '50% 60%', 'Что здесь покупают чаще всего', '60–80', 'м²',
           'Каждая пятая продажа. Обычно такая квартира стоит около 40,5&nbsp;млн&nbsp;₸')
 S5 = fact('courtyard', '50% 88%', 'Сколько владеют до&nbsp;перепродажи', '≈5', 'лет',
