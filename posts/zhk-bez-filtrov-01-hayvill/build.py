@@ -10,7 +10,7 @@ from PIL import Image
 
 HERE = pathlib.Path(__file__).resolve().parent
 NAVY, BLUE, TERRA, CREAM, SKY = '#0B2545', '#1768CE', '#B8613F', '#FBF2E6', '#DCEAF6'
-NAME = 'Хайвил'
+NAME = 'Highvill'
 IMG = {n: data_uri(Image.open(HERE / 'src' / f'{n}.jpg')) for n in ['interior', 'towers', 'aerial', 'courtyard']}
 
 CSS = f"""
@@ -72,7 +72,7 @@ def fact(img, pos, title, num, unit, line):
 S1 = page(full('aerial', '50% 0%', 520)
           + f'<div class="col" style="top:170px"><h1 class="t" style="font-size:150px;line-height:1;letter-spacing:-.04em">{NAME}</h1>'
             f'<p class="p" style="margin-top:20px;color:{NAVY};font-weight:700;font-size:54px;line-height:1.2">Что о&nbsp;нём говорят реальные сделки →</p></div>'
-          + tag(560, 1020, '≈650 тыс. ₸', 'за м² по сделкам', 470, 880))
+          + tag(560, 1020, 'Х тыс. ₸', 'за м² по сделкам', 470, 880))
 
 S2 = fact('towers', '50% 12%', 'Сколько стоит метр на&nbsp;самом деле', '≈650', 'тыс. ₸ за м²',
           'Столько обычно платят за&nbsp;метр в&nbsp;реальных сделках. Ориентир, чтобы понять, не&nbsp;завышена ли цена квартиры')
@@ -86,11 +86,11 @@ S5 = fact('courtyard', '50% 88%', 'Сколько владеют до&nbsp;пе�
 rows = ''.join(
     f'<div style="display:flex;align-items:center;gap:28px;padding:20px 0;border-top:2px solid #EADCC8">'
     f'<span style="flex:none;width:68px;height:68px;border-radius:50%;background:{TERRA};color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700">{i}</span>'
-    f'<span style="font-size:42px;line-height:1.25;font-weight:600;color:{NAVY};text-wrap:balance">{t}</span></div>'
-    for i, t in enumerate(['Дороже 650&nbsp;тыс.&nbsp;₸ за&nbsp;м²? Узнайте за&nbsp;что',
-                           '60–80&nbsp;м² — проще всего сравнить цену',
-                           'Цены растут — проверяйте конкретную квартиру',
-                           'Продают раньше 5&nbsp;лет? Спросите почему'], 1))
+    f'<span style="font-size:46px;line-height:1.25;font-weight:600;color:{NAVY};text-wrap:balance">{t}</span></div>'
+    for i, t in enumerate(['Метр дороже 650&nbsp;тыс.&nbsp;₸? Узнайте почему',
+                           '60–80&nbsp;м² проще всего сравнить',
+                           'Цены растут, но&nbsp;не&nbsp;у&nbsp;всех квартир',
+                           'Продают раньше 5&nbsp;лет? Спросите причину'], 1))
 S6 = page(top('towers', '50% 90%', 560)
           + f'<div class="col" style="top:500px"><h2 class="t">Что это значит для&nbsp;покупателя</h2><div style="margin-top:26px">{rows}</div></div>')
 
